@@ -1,0 +1,27 @@
+body{
+    background: whitesmoke;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+.btn{
+    background: rosyBrown;
+    margin: 20px;
+}
+
+.add-btn{
+    background: whiteSmoke;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+.app-title{
+    text-align: center;
+    color: rosyBrown;
+    font-size: 70px;
+}
+.container{
+    border: 5px solid rosyBrown;
+    border-radius: 25px;
+
+}
