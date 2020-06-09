@@ -1,0 +1,30 @@
+
+
+.add-btn{
+  background: whiteSmoke;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
+
+.add-chore-container {
+  text-align: left;
+  max-width: 500;
+  margin: auto;
+}
+
+.button-text {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue";
+  font-size: 30px;
+  font-style: Condensed bold;
+  font-variant: normal;
+  font-weight: 150;
+  line-height: 20px;
+  text-align: left;
+  color: #32639c;
+}
+
+.form-container {
+  justify-content: space-evenly;
+  padding: 30px;
+}

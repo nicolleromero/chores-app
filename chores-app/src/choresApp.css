@@ -1,27 +1,23 @@
+
+
 body{
     background: whitesmoke;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-family: 'Helvetica Neue';
+    font-size: 10px;
 }
 
 .btn{
-    background: rosyBrown;
+    background: #4A90E2;
     margin: 20px;
 }
 
-.add-btn{
-    background: whiteSmoke;
-    width: 30px;
-    height: 30px;
-    margin: 5px;
+.container {
+    border: 5px solid #4A90E2;
+    border-radius: 15px;
 }
-.app-title{
-    text-align: center;
-    color: rosyBrown;
-    font-size: 70px;
-}
-.container{
-    border: 5px solid rosyBrown;
-    border-radius: 25px;
 
+.top-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 30px;
 }
