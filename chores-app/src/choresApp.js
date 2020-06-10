@@ -2,74 +2,25 @@ import React from 'react';
 
 import { Title } from './Title';
 import { AddChore } from './AddChore';
+import { AddChoreList } from './AddChoreList';
+// import { AddProgressBar } from './AddProgressBar';
+// import { DisplayGoal } from './DisplayGoal';
+// import { Settings } from './Settings';
 
 import './choresApp.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      children: [
-        {
-          name: 'Ari',
-        },
-        {
-          name: 'Sam',
-        }
-      ],
-      list: []
-    };
+export class App extends React.Component {
+  state = {
+    children: [
+      {
+        name: 'Ari',
+      },
+      {
+        name: 'Sam',
+      }
+    ],
+    list: []
   }
-
-  // //incorporating local storage
-  // componentDidMount() {
-  //   this.hydrateStateWithLocalStorage();
-
-  //   // add event listener to save state to localStorage
-  //   // when user leaves/refreshes the page
-  //   window.addEventListener(
-  //     "beforeunload",
-  //     this.saveStateToLocalStorage.bind(this)
-  //   );
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener(
-  //     "beforeunload",
-  //     this.saveStateToLocalStorage.bind(this)
-  //   );
-
-  //   // saves if component has a chance to unmount
-  //   this.saveStateToLocalStorage();
-  // }
-
-  // hydrateStateWithLocalStorage() {
-  //   // for all items in state
-  //   for (let key in this.state) {
-  //     // if the key exists in localStorage
-  //     if (localStorage.hasOwnProperty(key)) {
-  //       // get the key's value from localStorage
-  //       let value = localStorage.getItem(key);
-
-  //       // parse the localStorage string and setState
-  //       try {
-  //         value = JSON.parse(value);
-  //         this.setState({ [key]: value });
-  //       } catch (e) {
-  //         // handle empty string
-  //         this.setState({ [key]: value });
-  //       }
-  //     }
-  //   }
-  // }
-
-  // saveStateToLocalStorage() {
-  //   // for every item in React state
-  //   for (let key in this.state) {
-  //     // save to localStorage
-  //     localStorage.setItem(key, JSON.stringify(this.state[key]));
-  //   }
-  // }
 
   addItemToList(newItem) {
     //copy of current list of items
@@ -86,7 +37,7 @@ class App extends React.Component {
 
   deleteItem(id) {
     //copy of current list of items
-    const list = [...this.state.list];
+    const list = this.state.list;
 
     //filter out item being deleted
     const updatedList = list.filter((item) => item.id !== id);
@@ -102,10 +53,7 @@ class App extends React.Component {
 
             <div>
               <AddChore onAddItem={(item) => this.addItemToList(item)} />
-              <AddChore onAddItem={(item) => this.addItemToList(item)} />
-              <AddChore onAddItem={(item) => this.addItemToList(item)} />
-              <AddChore onAddItem={(item) => this.addItemToList(item)} />
-              {/* Need to call AddItem w/ value from component file */}
+              <AddChoreList list={this.state.list} />
               <ul>
                 {this.state.list.map(item => {
                   return (
@@ -123,13 +71,7 @@ class App extends React.Component {
               </ul>
             </div>
         </div>
-
-        <div className="list-container">
-        </div>
       </div>
     );
   }
 }
-
-
-export default App;

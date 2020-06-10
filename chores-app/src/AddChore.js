@@ -9,15 +9,19 @@ export class AddChore extends React.Component {
 
   addItem() {
     //create item with unique id
+    let undoneList = [];
     const newItem = {
-      id: 1 + Math.random(),
+      id: Date.now(),
       value: this.state.inputValue,
       assignee: null,
       complete: false,
       points: 0,
+
     }
 
     this.props.onAddItem(newItem);
+
+    undoneList.push(this.props.newItem) /* Need to create array "list" */
 
     this.setState({inputValue: ""});
   }
