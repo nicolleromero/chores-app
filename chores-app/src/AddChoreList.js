@@ -35,16 +35,15 @@ export class AddChoreList extends React.Component {
     }
 
     return (
-      <div className="outer-list-container">
-        <h1 className="list-title">CHORES</h1>
-          <div className="inner-list-container>">
-            <h1 className="list-text">{this.formatChoreListTitles(undoneList, false)}</h1>
-          </div>
-          <div className="inner-list-container>">
-            <h1 className="list-text">{this.formatChoreListTitles(doneList, true)}</h1>
-          </div>
+      <div>
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">CHORES</h4>
+        </div>
+        <div class="card-body">
+          <h1 className="list-text">{this.formatChoreListTitles(undoneList, false)}</h1>
+          <h1 className="list-text">{this.formatChoreListTitles(doneList, true)}</h1>
+        </div>
       </div>
-
     );
   }
 }

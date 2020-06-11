@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './choresApp';
-import * as registerServiceWorker from './registerServiceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import * as registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-    <App />,
+  <App />,
   document.getElementById('root')
 );

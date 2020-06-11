@@ -23,7 +23,7 @@ export class AddChore extends React.Component {
 
     undoneList.push(this.props.newItem) /* Need to create array "list" */
 
-    this.setState({inputValue: ""});
+    this.setState({ inputValue: "" });
   }
 
   updateInput(value) {
@@ -34,24 +34,35 @@ export class AddChore extends React.Component {
 
   render() {
     return (
-      <form className="form-container" onSubmit={(e) => e.preventDefault()}>
-        <div className="button-text">Add Chore</div>
-
-        <input
-          type="text"
-          placeholder="Type chore here..."
-          value={this.state.inputValue}
-          onChange={(e) => this.updateInput(e.target.value)}
-        />
-
-        <button
-          className="add-btn btn-floating"
-          onClick={() => this.addItem()}
-          // disabled = {this.state.newItem.length}
-        >
-          <i class="material-icons"> + </i>
-        </button>
-      </form>
+      <div>
+        <div class="card-deck mb-3 text-center">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Add Chore</h4>
+            </div>
+            <div class="card-body">
+              <div class="col-sm">
+                <form class="form-inline card-title pricing-card-title" onSubmit={(e) => e.preventDefault()}>
+                  <div class="form-group mb-2">
+                    <input
+                      type="text"
+                      placeholder="Type chore here..."
+                      value={this.state.inputValue}
+                      onChange={(e) => this.updateInput(e.target.value)}
+                    />
+                  </div>
+                  <button
+                    type="submit" class="btn btn-primary mb-2"
+                    onClick={() => this.addItem()}
+                  >
+                    +
+                    </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div >
     );
   }
 }

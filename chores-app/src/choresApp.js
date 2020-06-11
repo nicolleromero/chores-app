@@ -42,36 +42,44 @@ export class App extends React.Component {
     //filter out item being deleted
     const updatedList = list.filter((item) => item.id !== id);
 
-    this.setState({list: updatedList});
+    this.setState({ list: updatedList });
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="top-container">
-          <Title name="Romero" date="6/6/2020" />
-
-            <div>
+      <React.Fragment>
+        <Title name="Romero" date="6/6/2020" />
+        <div class="container">
+          <div class="card center" >
+            <div class="card mb-4 shadow-sm">
               <AddChore onAddItem={(item) => this.addItemToList(item)} />
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
               <AddChoreList list={this.state.list} />
               <ul>
                 {this.state.list.map(item => {
                   return (
-                    <li key = {item.id}>
-                    {item.value}
-                    <button
-                      className="btn btn-floating"
-                      onClick = {() => this.deleteItem(item.id)}
-                    >
-                      <i class="material-icons">X</i>
-                    </button>
+                    <li key={item.id}>
+                      {item.value}
+                      <button
+                        className="btn btn-floating"
+                        onClick={() => this.deleteItem(item.id)}
+                      >
+                        <i class="material-icons">X</i>
+                      </button>
                     </li>
                   );
                 })}
               </ul>
             </div>
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

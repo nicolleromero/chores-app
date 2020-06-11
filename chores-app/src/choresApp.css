@@ -11,12 +11,6 @@ body{
     margin: 20px;
 }
 
-.container {
-    border: 5px solid #4A90E2;
-    border-radius: 15px;
-}
-
-
 .top-container {
   display: flex;
   justify-content: space-evenly;
