@@ -22,15 +22,7 @@ export class Title extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-          <h5 class="my-0 mr-md-auto font-weight-normal">NR Productions</h5>
-          <nav class="my-2 my-md-0 mr-md-3">
-          </nav>
-          <a class="btn btn-outline-primary" href="#">Add kids!</a>
-        </div>
-
-
-        <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-left">
           <h1 className="display-4">{this.props.name} Chores List</h1>
           <p className="lead">Week of {this.props.date}</p>
         </div>

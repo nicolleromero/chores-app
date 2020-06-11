@@ -1,10 +1,11 @@
 import React from 'react';
-
+import { Dropdown } from 'react-bootstrap';
 import './AddChore.css';
 
 export class AddChore extends React.Component {
   state = {
     inputValue: "",
+    assignee: null
   }
 
   addItem() {
@@ -13,7 +14,7 @@ export class AddChore extends React.Component {
     const newItem = {
       id: Date.now(),
       value: this.state.inputValue,
-      assignee: null,
+      assignee: this.state.assignee,
       complete: false,
       points: 0,
 
@@ -23,12 +24,21 @@ export class AddChore extends React.Component {
 
     undoneList.push(this.props.newItem) /* Need to create array "list" */
 
-    this.setState({ inputValue: "" });
+    this.setState({
+      inputValue: "",
+      assignee: null,
+    });
   }
 
   updateInput(value) {
     this.setState({
       inputValue: value,
+    });
+  }
+
+  updateAssignee(value) {
+    this.setState({
+      assignee: value,
     });
   }
 
@@ -38,25 +48,43 @@ export class AddChore extends React.Component {
         <div class="card-deck mb-3 text-center">
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Add Chore</h4>
+              <h4 class="my-0 font-weight-normal">Add a Chore</h4>
             </div>
             <div class="card-body">
               <div class="col-sm">
                 <form class="form-inline card-title pricing-card-title" onSubmit={(e) => e.preventDefault()}>
-                  <div class="form-group mb-2">
+                  <div class="form-group">
                     <input
                       type="text"
-                      placeholder="Type chore here..."
+                      placeholder="Type chore here"
                       value={this.state.inputValue}
                       onChange={(e) => this.updateInput(e.target.value)}
                     />
-                  </div>
-                  <button
-                    type="submit" class="btn btn-primary mb-2"
-                    onClick={() => this.addItem()}
-                  >
-                    +
+
+                    <Dropdown
+                      value={this.state.assignee}
+                      onSelect={(key) => this.updateAssignee(key)}
+                    >
+                      <Dropdown.Toggle variant="primary" id="assignee">
+                        Assignee
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        {this.props.assignees.map((kid) => {
+                          return (
+                            <Dropdown.Item key={kid} eventKey={kid}>{kid}</Dropdown.Item>
+                          )
+                        })}
+                      </Dropdown.Menu>
+                    </Dropdown>
+
+                    <button
+                      type="submit" class="btn btn-primary"
+                      onClick={() => this.addItem()}
+                    >
+                      Add +
                     </button>
+                  </div>
+
                 </form>
               </div>
             </div>

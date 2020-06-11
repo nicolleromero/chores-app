@@ -11,14 +11,7 @@ import './choresApp.css';
 
 export class App extends React.Component {
   state = {
-    children: [
-      {
-        name: 'Ari',
-      },
-      {
-        name: 'Sam',
-      }
-    ],
+    assignees: ['Sam', 'Ari'],
     list: []
   }
 
@@ -48,11 +41,23 @@ export class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Title name="Romero" date="6/6/2020" />
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+          <h5 class="my-0 mr-md-auto font-weight-normal">NR Productions</h5>
+          <nav class="my-2 my-md-0 mr-md-3"></nav>
+          <button class="btn btn-outline-primary">Setup</button>
+        </div>
         <div class="container">
-          <div class="card center" >
-            <div class="card mb-4 shadow-sm">
-              <AddChore onAddItem={(item) => this.addItemToList(item)} />
+          <div class="row">
+            <div class="col">
+              <Title name="Romero" date="6/6/2020" />
+            </div>
+            <div class="col">
+              <div class="card mb-4 shadow-sm">
+                <AddChore
+                  assignees={this.state.assignees}
+                  onAddItem={(item) => this.addItemToList(item)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -60,22 +65,16 @@ export class App extends React.Component {
         <div class="container">
           <div class="card-deck mb-3 text-center">
             <div class="card mb-4 shadow-sm">
-              <AddChoreList list={this.state.list} />
-              <ul>
-                {this.state.list.map(item => {
-                  return (
-                    <li key={item.id}>
-                      {item.value}
-                      <button
-                        className="btn btn-floating"
-                        onClick={() => this.deleteItem(item.id)}
-                      >
-                        <i class="material-icons">X</i>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
+              {this.state.assignees.map((kid) => {
+                return (
+                  <AddChoreList
+                    assignee={kid}
+                    list={this.state.list.filter((item) => {
+                      return item.assignee === kid;
+                    })}
+                  />
+                )
+              })}
             </div>
           </div>
         </div>

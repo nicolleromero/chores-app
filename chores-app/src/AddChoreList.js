@@ -1,5 +1,5 @@
 import React from 'react';
-import AddChore from "./AddChore";
+
 import './AddChoreList.css';
 
 export class AddChoreList extends React.Component {
@@ -37,12 +37,27 @@ export class AddChoreList extends React.Component {
     return (
       <div>
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">CHORES</h4>
+          <h4 class="my-0 font-weight-normal">{this.props.assignee}'s Chores</h4>
         </div>
         <div class="card-body">
           <h1 className="list-text">{this.formatChoreListTitles(undoneList, false)}</h1>
           <h1 className="list-text">{this.formatChoreListTitles(doneList, true)}</h1>
         </div>
+        <ul>
+          {this.props.list.map(item => {
+            return (
+              <li key={item.id}>
+                {item.value}
+                <button
+                  className="btn btn-floating"
+                  onClick={() => this.deleteItem(item.id)}
+                >
+                  <i class="material-icons">X</i>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
