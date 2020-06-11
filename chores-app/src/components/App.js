@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Title } from './Title';
 import { AddChore } from './AddChore';
-import { AddChoreList } from './AddChoreList';
+import { ChoreList } from './ChoreList';
 // import { AddProgressBar } from './AddProgressBar';
 // import { DisplayGoal } from './DisplayGoal';
 // import { Settings } from './Settings';
 
-import './choresApp.css';
+import './App.css';
 
 export class App extends React.Component {
   state = {
@@ -28,15 +28,10 @@ export class App extends React.Component {
     })
   }
 
-  deleteItem(id) {
-    //copy of current list of items
-    const list = this.state.list;
-
-    //filter out item being deleted
-    const updatedList = list.filter((item) => item.id !== id);
-
-    this.setState({ list: updatedList });
-  }
+  handleDelete = (itemId) => {
+    const list = this.state.list.filter((c) => c.id !== itemId);
+    this.setState({ list });
+  };
 
   render() {
     return (
@@ -63,21 +58,21 @@ export class App extends React.Component {
         </div>
 
         <div class="container">
-          <div class="card-deck mb-3 text-center">
-            <div class="card mb-4 shadow-sm">
-              {this.state.assignees.map((kid) => {
-                return (
-                  <AddChoreList
-                    assignee={kid}
-                    list={this.state.list.filter((item) => {
-                      return item.assignee === kid;
-                    })}
-                  />
-                )
-              })}
-            </div>
+          <div class="row">
+            {this.state.assignees.map((kid) => {
+              return (
+                <ChoreList
+                  assignee={kid}
+                  list={this.state.list.filter((item) => {
+                    return item.assignee === kid;
+                  })}
+                  onDelete={this.handleDelete}
+                />
+              )
+            })}
           </div>
         </div>
+
       </React.Fragment>
     );
   }
