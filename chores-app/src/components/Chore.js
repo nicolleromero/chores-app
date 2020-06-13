@@ -13,13 +13,12 @@ export class Chore extends React.Component {
             <InputGroup.Checkbox
               aria-label="Checkbox for following text input"
               checked={this.props.item.complete}
-              onChange={() => this.props.onToggleComplete(this.props.item.id)}
+              onChange={(e) => this.props.onChange(this.props.item.id, 'complete', e.target.checked)}
             />
           </InputGroup.Prepend>
           <FormControl
-            readOnly
             value={this.props.item.value}
-
+            onChange={(e) => this.props.onChange(this.props.item.id, 'value', e.target.value)}
           />
           <Badge
             pill variant="primary"

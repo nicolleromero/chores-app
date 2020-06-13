@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, FormControl, InputGroup } from 'react-bootstrap';
 
+
 import './AddChore.css';
 
 export class AddChore extends React.Component {
@@ -92,7 +93,7 @@ export class AddChore extends React.Component {
                 </InputGroup>
               </Col>
               <Button
-                disabled={!this.state.assignee || !this.state.inputValue || !this.state.inputPoints}
+                disabled={!this.state.assignee || !this.state.inputValue || !this.state.inputPoints || this.state.inputPoints < 0}
                 type="submit" class="btn btn-primary"
                 onClick={() => this.addItem()}
               >

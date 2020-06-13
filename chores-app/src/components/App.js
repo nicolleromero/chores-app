@@ -3,6 +3,9 @@ import React from 'react';
 import { KidCard } from './KidCard';
 import { Title } from './Title';
 import { AddChore } from './AddChore';
+// import { GoalProgressBar } from './GoalProgressBar'
+// import useWindowSize from 'react-use/lib/useWindowSize'
+// import Confetti from 'react-confetti'
 
 import './App.css';
 
@@ -13,16 +16,9 @@ export class App extends React.Component {
   }
 
   addItemToList(newItem) {
-    //copy of current list of items
-    const list = [...this.state.list];
+    const list = [...this.state.list, newItem];
 
-    //add new item to list
-    list.push(newItem);
-
-    //update state with new list and reset newItem input
-    this.setState({
-      list,
-    })
+    this.setState({ list });
   }
 
   handleDelete = (itemId) => {
@@ -30,19 +26,33 @@ export class App extends React.Component {
     this.setState({ list });
   };
 
-  handleToggleComplete = (itemId) => {
+  handleChange = (itemId, key, value) => {
     const list = this.state.list.map((listItem) => {
       if (listItem.id === itemId) {
-        listItem.complete = !listItem.complete;
+        return { ...listItem, [key]: value };
       }
       return listItem;
     });
     this.setState({ list });
   }
 
+  // handleConfetti = (goalProgress) => {
+  //   const { width, height } = useWindowSize();
+  //   if (goalProgress >= 100) {
+  //     return (
+  //       <Confetti
+  //         width={width}
+  //         height={height}
+  //       />
+  //     );
+  //   }
+  // }
+
   render() {
     return (
       <React.Fragment>
+        {/* onGoalReached={(this.props.now) => this.handleConfetti(this.props.now)} */}
+
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
           <h5 class="my-0 mr-md-auto font-weight-normal">NR Productions</h5>
           <nav class="my-2 my-md-0 mr-md-3"></nav>
@@ -74,7 +84,7 @@ export class App extends React.Component {
                     return item.assignee === assignee;
                   })}
                   onDelete={this.handleDelete}
-                  onToggleComplete={this.handleToggleComplete}
+                  onChange={this.handleChange}
                 />
               )
             })}

@@ -22,7 +22,7 @@ export class KidCard extends React.Component {
             assignee={this.props.assignee}
             list={this.props.list}
             onDelete={this.props.onDelete}
-            onToggleComplete={this.props.onToggleComplete}
+            onChange={this.props.onChange}
           />
           <Goals
             assignee={this.props.assignee}

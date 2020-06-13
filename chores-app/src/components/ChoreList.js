@@ -1,7 +1,10 @@
-import React from 'react';
+// import React from 'react';
+import React, { useState } from "react";
+import FlipMove from 'react-flip-move';
+import { ListGroup } from 'react-bootstrap';
 
 import { Chore } from './Chore'
-import { ListGroup } from 'react-bootstrap';
+
 
 import './ChoreList.css';
 
@@ -46,15 +49,17 @@ export class ChoreList extends React.Component {
           <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(undoneList, false)}</h5>
           <div>
             <ListGroup>
-              {undoneList.map(item => {
-                return (
-                  <Chore
-                    item={item}
-                    onDelete={this.props.onDelete}
-                    onToggleComplete={this.props.onToggleComplete}
-                  />
-                );
-              })}
+              <FlipMove duration={350} easing="ease-out">
+                {undoneList.map(item => {
+                  return (
+                    <Chore
+                      item={item}
+                      onDelete={this.props.onDelete}
+                      onChange={this.props.onChange}
+                    />
+                  );
+                })}
+              </FlipMove>
             </ListGroup>
           </div>
         </div>
@@ -67,7 +72,7 @@ export class ChoreList extends React.Component {
               <Chore
                 item={item}
                 onDelete={this.props.onDelete}
-                onToggleComplete={this.props.onToggleComplete}
+                onChange={this.props.onChange}
               />
             );
           })}

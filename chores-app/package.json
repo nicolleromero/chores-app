@@ -9,7 +9,9 @@
     "bootstrap": "^4.5.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-confetti": "^5.0.1",
     "react-dom": "^16.13.1",
+    "react-flip-move": "^3.0.4",
     "react-scripts": "3.4.1"
   },
   "scripts": {
