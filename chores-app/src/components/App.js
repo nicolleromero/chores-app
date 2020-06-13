@@ -1,11 +1,8 @@
 import React from 'react';
 
+import { KidCard } from './KidCard';
 import { Title } from './Title';
 import { AddChore } from './AddChore';
-import { ChoreList } from './ChoreList';
-// import { AddProgressBar } from './AddProgressBar';
-// import { DisplayGoal } from './DisplayGoal';
-// import { Settings } from './Settings';
 
 import './App.css';
 
@@ -33,6 +30,16 @@ export class App extends React.Component {
     this.setState({ list });
   };
 
+  handleToggleComplete = (itemId) => {
+    const list = this.state.list.map((listItem) => {
+      if (listItem.id === itemId) {
+        listItem.complete = !listItem.complete;
+      }
+      return listItem;
+    });
+    this.setState({ list });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -43,9 +50,11 @@ export class App extends React.Component {
         </div>
         <div class="container">
           <div class="row">
-            <div class="col">
-              <Title name="Romero" date="6/6/2020" />
-            </div>
+            <Title name="Romero" />
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
             <div class="col">
               <div class="card mb-4 shadow-sm">
                 <AddChore
@@ -55,25 +64,23 @@ export class App extends React.Component {
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="container">
           <div class="row">
-            {this.state.assignees.map((kid) => {
+            {this.state.assignees.map((assignee) => {
               return (
-                <ChoreList
-                  assignee={kid}
+                <KidCard
+                  assignee={assignee}
                   list={this.state.list.filter((item) => {
-                    return item.assignee === kid;
+                    return item.assignee === assignee;
                   })}
                   onDelete={this.handleDelete}
+                  onToggleComplete={this.handleToggleComplete}
                 />
               )
             })}
           </div>
         </div>
-
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }

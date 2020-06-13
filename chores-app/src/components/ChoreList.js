@@ -25,20 +25,6 @@ export class ChoreList extends React.Component {
     return title;
   }
 
-  deleteItem(id) {
-    //copy of current list of items
-    const list = this.state.list;
-
-    //filter out item being deleted
-    const updatedList = list.filter((item) => item.id !== id);
-
-    this.setState({ list: updatedList });
-  }
-
-  // completeItem(id) {
-
-  // }
-
   render() {
     let doneList = [];
     let undoneList = [];
@@ -52,34 +38,40 @@ export class ChoreList extends React.Component {
     }
 
     return (
-      <div class="col">
-        <div class="container">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">{this.props.assignee}'s Chores</h4>
-            </div>
-            <div class="card-body">
-              <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(undoneList, false)}</h5>
-              <div>
-                <ListGroup>
-                  {this.props.list.map(item => {
-                    return (
-                      <Chore
-                        item={item}
-                        onDelete={this.props.onDelete}
-                      // onToggleComplete={this.props.onToggleComplete}
-                      />
-                    );
-                  })}
-                </ListGroup>
-              </div>
-            </div>
-            <div class="card-body">
-              <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(doneList, true)}</h5>
-            </div>
-          </div>
-
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal text-center">{this.props.assignee}'s Chores</h4>
         </div>
+        <div class="card-body">
+          <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(undoneList, false)}</h5>
+          <div>
+            <ListGroup>
+              {undoneList.map(item => {
+                return (
+                  <Chore
+                    item={item}
+                    onDelete={this.props.onDelete}
+                    onToggleComplete={this.props.onToggleComplete}
+                  />
+                );
+              })}
+            </ListGroup>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(doneList, true)}</h5>
+        </div>
+        <ListGroup>
+          {doneList.map(item => {
+            return (
+              <Chore
+                item={item}
+                onDelete={this.props.onDelete}
+                onToggleComplete={this.props.onToggleComplete}
+              />
+            );
+          })}
+        </ListGroup>
       </div>
     );
   }
