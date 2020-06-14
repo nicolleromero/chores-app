@@ -1,5 +1,5 @@
 // import React from 'react';
-import React, { useState } from "react";
+import React, { useState, Card } from "react";
 import FlipMove from 'react-flip-move';
 import { ListGroup } from 'react-bootstrap';
 
@@ -45,38 +45,38 @@ export class ChoreList extends React.Component {
         <div class="card-header">
           <h4 class="my-0 font-weight-normal text-center">{this.props.assignee}'s Chores</h4>
         </div>
-        <div class="card-body">
-          <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(undoneList, false)}</h5>
-          <div>
-            <ListGroup>
-              <FlipMove duration={350} easing="ease-out">
-                {undoneList.map(item => {
-                  return (
-                    <Chore
-                      item={item}
-                      onDelete={this.props.onDelete}
-                      onChange={this.props.onChange}
-                    />
-                  );
-                })}
-              </FlipMove>
-            </ListGroup>
-          </div>
+        <div class="card-body text-center">
+          <ListGroup variant="flush">
+            <ListGroup.Item className="align-text-center text-primary">{this.formatChoreListTitles(undoneList, false)}</ListGroup.Item>
+            <FlipMove duration={350} easing="ease-out">
+              {undoneList.map(item => {
+                return (
+                  <Chore
+                    item={item}
+                    onDelete={this.props.onDelete}
+                    onChange={this.props.onChange}
+                  />
+                );
+              })}
+            </FlipMove>
+          </ListGroup>
         </div>
-        <div class="card-body">
-          <h5 class="my-0 font-weight-normal">{this.formatChoreListTitles(doneList, true)}</h5>
+        <div class="card-body text-center">
+          <ListGroup variant="flush">
+            <ListGroup.Item className="align-text-center text-primary">{this.formatChoreListTitles(undoneList, false)}</ListGroup.Item>
+            <FlipMove duration={350} easing="ease-out">
+              {doneList.map(item => {
+                return (
+                  <Chore
+                    item={item}
+                    onDelete={this.props.onDelete}
+                    onChange={this.props.onChange}
+                  />
+                );
+              })}
+            </FlipMove>
+          </ListGroup>
         </div>
-        <ListGroup>
-          {doneList.map(item => {
-            return (
-              <Chore
-                item={item}
-                onDelete={this.props.onDelete}
-                onChange={this.props.onChange}
-              />
-            );
-          })}
-        </ListGroup>
       </div>
     );
   }

@@ -17,7 +17,8 @@ export class KidCard extends React.Component {
 
     return (
       <Col xs={6}>
-        <div class="card mb-4 shadow-sm">
+        <div class="container">
+
           <ChoreList
             assignee={this.props.assignee}
             list={this.props.list}
@@ -29,6 +30,7 @@ export class KidCard extends React.Component {
             completedPoints={this.calculatePointsTotal()}
           />
         </div>
+
       </Col>
     );
   }

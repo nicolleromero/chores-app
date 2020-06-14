@@ -23,7 +23,6 @@ export class Goals extends React.Component {
 
   render() {
     return (
-
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal text-center">{this.props.assignee}'s Goals</h4>
@@ -44,13 +43,13 @@ export class Goals extends React.Component {
             />
           </InputGroup>
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <GoalProgressBar
+            className="align-items-center"
             percentage={this.props.completedPoints / this.state.inputGoalPoints}
           />
         </div>
       </div>
-
     );
   }
 }
