@@ -3,22 +3,27 @@ import React from 'react';
 import { KidCard } from './KidCard';
 import { Title } from './Title';
 import { AddChore } from './AddChore';
-// import { GoalProgressBar } from './GoalProgressBar'
-// import useWindowSize from 'react-use/lib/useWindowSize'
-// import Confetti from 'react-confetti'
+import { SetupModal } from './SetupModal';
 
 import './App.css';
 
 export class App extends React.Component {
   state = {
     assignees: ['Sam', 'Ari'],
-    list: []
+    list: [],
+    showSetupModal: false,
   }
 
   addItemToList(newItem) {
     const list = [...this.state.list, newItem];
 
     this.setState({ list });
+  }
+
+  addKidToAssignees(newKid) {
+    const assignees = [...this.state.assignees, newKid];
+
+    this.setState({ assignees });
   }
 
   handleDelete = (itemId) => {
@@ -36,27 +41,22 @@ export class App extends React.Component {
     this.setState({ list });
   }
 
-  // handleConfetti = (goalProgress) => {
-  //   const { width, height } = useWindowSize();
-  //   if (goalProgress >= 100) {
-  //     return (
-  //       <Confetti
-  //         width={width}
-  //         height={height}
-  //       />
-  //     );
-  //   }
-  // }
+  handleSetup = () => {
+    this.setState({ showSetupModal: true });
+  }
 
   render() {
     return (
       <React.Fragment>
-        {/* onGoalReached={(this.props.now) => this.handleConfetti(this.props.now)} */}
-
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
           <h5 class="my-0 mr-md-auto font-weight-normal">NR Productions</h5>
           <nav class="my-2 my-md-0 mr-md-3"></nav>
-          <button class="btn btn-outline-primary">Setup</button>
+          <button
+            class="btn btn-outline-primary"
+            onClick={this.handleSetup}
+          >
+            Setup
+          </button>
         </div>
         <div class="container">
           <div class="row">

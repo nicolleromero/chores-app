@@ -25,7 +25,7 @@ export class Goals extends React.Component {
     return (
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal text-center">{this.props.assignee}'s Goals</h4>
+          <h4 class="my-0 font-weight-normal text-center">{this.props.assignee}'s Goal</h4>
         </div>
         <div class="card-body">
           <InputGroup className="align-items-center">
