@@ -1,18 +1,16 @@
+@tailwind base;
 
+@tailwind components;
 
-body{
-    background: whitesmoke;
-    font-family: 'Helvetica Neue';
-    font-size: 10px;
-}
+@tailwind utilities;
 
-.btn{
-    background: #4A90E2;
-    margin: 20px;
-}
-
-.top-container {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 30px;
-}
+.navbar-subtitle {
+  font-family: "Helvetica Neue";
+    font-size: 30px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 100;
+    line-height: 50px;
+    text-align: center;
+    color: #32639c;
+  }

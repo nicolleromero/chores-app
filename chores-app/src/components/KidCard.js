@@ -2,7 +2,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 
 import { ChoreList } from './ChoreList';
-import { Goals } from './Goals';
+import { GoalLists } from './GoalLists';
 
 export class KidCard extends React.Component {
 
@@ -17,19 +17,21 @@ export class KidCard extends React.Component {
 
     return (
       <Col xs={6}>
-        <div class="container">
 
-          <ChoreList
-            assignee={this.props.assignee}
-            list={this.props.list}
-            onDelete={this.props.onDelete}
-            onChange={this.props.onChange}
-          />
-          <Goals
-            assignee={this.props.assignee}
-            completedPoints={this.calculatePointsTotal()}
-          />
-        </div>
+        <ChoreList
+          assignee={this.props.assignee}
+          list={this.props.list}
+          onDelete={this.props.onDelete}
+          onChange={this.props.onChange}
+        />
+
+        <GoalLists
+          assignee={this.props.assignee}
+          completedPoints={this.calculatePointsTotal()}
+          goalList={this.props.goalList}
+          onAddGoal={this.props.onAddGoal}
+          onChangeGoal={this.props.onChangeGoal}
+        />
 
       </Col>
     );

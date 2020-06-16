@@ -2,23 +2,23 @@
 
 .app-title {
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue";
-  font-size: 44px;
-  font-style: Condensed bold;
+  font-size: 48px;
+  font-style: ;
   font-variant: normal;
   font-weight: 150;
   line-height: 30px;
-  text-align: left;
+  text-align: center;
   color: #32639c;
 }
 
 .app-subtitle {
 font-family: "Helvetica Neue";
-  font-size: 34px;
-  font-style: italic;
+  font-size: 30px;
+  font-style: i;
   font-variant: normal;
   font-weight: 100;
-  line-height: 25px;
-  text-align: left;
+  line-height: 50px;
+  text-align: center;
   color: #32639c;
 }
 

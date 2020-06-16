@@ -43,11 +43,15 @@ export class ChoreList extends React.Component {
     return (
       <div class="card shadow-sm">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal text-center">{this.props.assignee}'s Chores</h4>
+
+          <h4 class="chore-maintitle">
+            {this.props.assignee}'s Chores</h4>
         </div>
         <div class="card-body text-center">
           <ListGroup variant="flush">
-            <ListGroup.Item className="align-text-center text-primary">{this.formatChoreListTitles(undoneList, false)}</ListGroup.Item>
+
+            <div className="align-text-center chore-title">
+              {this.formatChoreListTitles(undoneList, false)}</div>
             <FlipMove duration={350} easing="ease-out">
               {undoneList.map(item => {
                 return (
@@ -63,7 +67,8 @@ export class ChoreList extends React.Component {
         </div>
         <div class="card-body text-center">
           <ListGroup variant="flush">
-            <ListGroup.Item className="align-text-center text-primary">{this.formatChoreListTitles(undoneList, false)}</ListGroup.Item>
+            <div className="align-text-center chore-title">
+              {this.formatChoreListTitles(doneList, true)}</div>
             <FlipMove duration={350} easing="ease-out">
               {doneList.map(item => {
                 return (

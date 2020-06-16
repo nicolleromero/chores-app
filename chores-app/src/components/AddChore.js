@@ -12,7 +12,6 @@ export class AddChore extends React.Component {
   }
 
   addItem() {
-    //create item with unique id
     const newItem = {
       id: Date.now(),
       value: this.state.inputValue,
@@ -51,7 +50,7 @@ export class AddChore extends React.Component {
     return (
       <div>
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal text-center">Add a Chore</h4>
+          <h4 class="chore-maintitle text-center">Add a Chore</h4>
         </div>
         <div class="card-body">
 

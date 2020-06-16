@@ -19,8 +19,8 @@ export class Title extends React.Component {
     return (
       <React.Fragment>
         <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-          <h1 className="display-4">{this.props.name} Chores List</h1>
-          <p className="lead">Week of {getCurrentWeek()}</p>
+          <h1 className="app-title">{this.props.name} Chores List</h1>
+          <p className="app-subtitle">Week of {getCurrentWeek()}</p>
         </div>
       </React.Fragment>
     );
