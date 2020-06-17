@@ -1,4 +1,5 @@
 import React from 'react';
+import Confetti from 'react-confetti'
 
 import { KidCard } from './KidCard';
 import { Title } from './Title';
@@ -12,6 +13,7 @@ export class App extends React.Component {
     assignees: ['Sam', 'Ari'],
     list: [],
     goalList: [],
+    showConfetti: false,
     showSetupModal: false,
   }
 
@@ -58,6 +60,14 @@ export class App extends React.Component {
       return listItem;
     });
     this.setState({ list });
+  }
+
+  handleGoalCompleted = () => {
+    this.setState({ showConfetti: true });
+  }
+
+  handleConfettiComplete = () => {
+    this.setState({ showConfetti: false });
   }
 
   handleSetup = () => {
@@ -112,6 +122,7 @@ export class App extends React.Component {
                     onChange={this.handleChange}
                     onAddGoal={this.handleAddGoal}
                     onChangeGoal={this.handleChangeGoal}
+                    onGoalCompleted={this.handleGoalCompleted}
                   />
                 )
               })}
@@ -124,7 +135,15 @@ export class App extends React.Component {
           <nav class="my-2 my-md-0 mr-md-3"></nav>
         </div>
 
-      </React.Fragment >
+        {this.state.showConfetti && (
+          <Confetti
+            recycle={false}
+            style={{ position: 'fixed' }}
+            onConfettiComplete={this.handleConfettiComplete}
+          />
+        )}
+
+      </React.Fragment>
     );
   }
 }

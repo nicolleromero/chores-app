@@ -13,12 +13,8 @@ export class KidCard extends React.Component {
   }
 
   render() {
-
-
     return (
-
       <Col xs={6}>
-
         <ChoreList
           assignee={this.props.assignee}
           list={this.props.list}
@@ -32,9 +28,9 @@ export class KidCard extends React.Component {
           goalList={this.props.goalList}
           onAddGoal={this.props.onAddGoal}
           onChangeGoal={this.props.onChangeGoal}
+          onGoalCompleted={this.props.onGoalCompleted}
         />
       </Col>
-
     );
   }
 }

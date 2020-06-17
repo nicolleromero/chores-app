@@ -13,6 +13,22 @@ export class Goals extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (!this.props.goal) {
+      this.addGoal();
+      return;
+    }
+
+    if (
+      this.props.completedPoints >= this.props.goal.points &&
+      prevProps.goal &&
+      prevProps.goal.points &&
+      prevProps.completedPoints < prevProps.goal.points
+    ) {
+      this.props.onGoalCompleted();
+    }
+  }
+
   addGoal() {
     const newGoal = {
       id: Math.random().toString(36).slice(2),
@@ -26,7 +42,6 @@ export class Goals extends React.Component {
   }
 
   render() {
-
     if (!this.props.goal) {
       return null;
     }
@@ -34,9 +49,9 @@ export class Goals extends React.Component {
     return (
       <div>
         <div class="card-header">
-
           <h4 class="chore-maintitle text-center">
-            🚀 Current Goal</h4>
+            🚀 Current Goal
+          </h4>
         </div>
         <div class="card-body">
           <InputGroup className="align-items-center">

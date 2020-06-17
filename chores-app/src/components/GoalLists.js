@@ -28,6 +28,7 @@ export class GoalLists extends React.Component {
               completedPoints={this.props.completedPoints}
               onAddGoal={this.props.onAddGoal}
               onChangeGoal={this.props.onChangeGoal}
+              onGoalCompleted={this.props.onGoalCompleted}
             />
           </FlipMove>
         </ListGroup>
