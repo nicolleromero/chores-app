@@ -16,6 +16,7 @@ export class KidCard extends React.Component {
 
 
     return (
+
       <Col xs={6}>
 
         <ChoreList
@@ -32,8 +33,8 @@ export class KidCard extends React.Component {
           onAddGoal={this.props.onAddGoal}
           onChangeGoal={this.props.onChangeGoal}
         />
-
       </Col>
+
     );
   }
 }

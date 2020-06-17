@@ -43,7 +43,6 @@ export class ChoreList extends React.Component {
     return (
       <div class="card shadow-sm">
         <div class="card-header">
-
           <h4 class="chore-maintitle">
             {this.props.assignee}'s Chores</h4>
         </div>

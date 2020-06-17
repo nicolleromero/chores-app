@@ -68,8 +68,9 @@ export class App extends React.Component {
     return (
       <React.Fragment>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
-          <div class="mr-md-auto navbar-subtitle">NR Productions</div>
           <img class="inline-block h-8 w-8 rounded-full" src="https://github.com/nicolleromero.png?size=40" alt="" />
+          <div class="mr-md-auto navbar-subtitle">&nbsp;&nbsp;NR Productions</div>
+
           <nav class="my-2 my-md-0 mr-md-3"></nav>
           <button
             class="flex -mb-px"
@@ -95,24 +96,26 @@ export class App extends React.Component {
             </div>
           </div>
 
-          <div class="row">
-            {this.state.assignees.map((assignee) => {
-              return (
-                <KidCard
-                  assignee={assignee}
-                  list={this.state.list.filter((chore) => {
-                    return chore.assignee === assignee;
-                  })}
-                  goalList={this.state.goalList.filter((goal) => {
-                    return goal.assignee === assignee;
-                  })}
-                  onDelete={this.handleDelete}
-                  onChange={this.handleChange}
-                  onAddGoal={this.handleAddGoal}
-                  onChangeGoal={this.handleChangeGoal}
-                />
-              )
-            })}
+          <div class="container">
+            <div class="row">
+              {this.state.assignees.map((assignee) => {
+                return (
+                  <KidCard
+                    assignee={assignee}
+                    list={this.state.list.filter((chore) => {
+                      return chore.assignee === assignee;
+                    })}
+                    goalList={this.state.goalList.filter((goal) => {
+                      return goal.assignee === assignee;
+                    })}
+                    onDelete={this.handleDelete}
+                    onChange={this.handleChange}
+                    onAddGoal={this.handleAddGoal}
+                    onChangeGoal={this.handleChangeGoal}
+                  />
+                )
+              })}
+            </div>
           </div>
         </div>
 
