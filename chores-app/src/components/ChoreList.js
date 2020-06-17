@@ -12,6 +12,7 @@ export class ChoreList extends React.Component {
 
   formatChoreListTitles(list, completed) {
     let title = "";
+
     if (list.length !== 1) {
       if (!completed) {
         title = `${list.length} chores to do`;
@@ -43,8 +44,8 @@ export class ChoreList extends React.Component {
     return (
       <div class="card shadow-sm">
         <div class="card-header">
-          <h4 class="chore-maintitle">
-            {this.props.assignee}'s Chores</h4>
+          <h4 class="chore-maintitle text-center">
+            🧹 {this.props.assignee}'s Chores</h4>
         </div>
         <div class="card-body text-center">
           <ListGroup variant="flush">

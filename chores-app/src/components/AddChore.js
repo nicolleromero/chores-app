@@ -50,7 +50,7 @@ export class AddChore extends React.Component {
     return (
       <div>
         <div class="card-header">
-          <h4 class="chore-maintitle text-center">Add a Chore</h4>
+          <h4 class="chore-maintitle text-center">🌟 Add a Chore</h4>
         </div>
         <div class="card-body">
 
@@ -66,7 +66,7 @@ export class AddChore extends React.Component {
                   />
                   <DropdownButton
                     as={InputGroup.Append}
-                    variant="outline-primary"
+                    variant="outline-secondary"
                     title={this.state.assignee || 'Assignee'}
                     id="input-group-dropdown"
                     value={this.state.assignee}
