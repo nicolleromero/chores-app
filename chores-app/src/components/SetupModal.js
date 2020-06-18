@@ -50,59 +50,66 @@ export class SetupModal extends React.Component {
         <Modal.Header className="align-items-center">
           <h4 class="chore-maintitle text-center align-items-center">😀 Add Assignees</h4>
         </Modal.Header>
+        <div class="card-body text-center">
+          <Modal.Body>
+            <Form onSubmit={(e) => e.preventDefault()}>
+              <Form.Row controlId="formBasicEmail">
+                <InputGroup className="align-items-center">
+                  <Form.Control
+                    class="appearance-none bg-transparent border-none w-full text-center text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    type="text"
+                    value={this.state.inputValue}
+                    onChange={(e) => this.updateInput(e.target.value)}
+                    placeholder="Enter new assignee's name"
+                  />
+                  <Button
+                    disabled={!this.state.inputValue}
+                    type="submit"
+                    class="btn btn-primary"
+                    onClick={() => this.addAssignee()}
+                  >
+                    +
+                  </Button>
+                </InputGroup>
+              </Form.Row>
+            </Form>
 
-        <Modal.Body>
-          <Form>
-            <Form.Row controlId="formBasicEmail">
-              <InputGroup className="align-items-center">
-                <Form.Control
-                  class="appearance-none bg-transparent border-none w-full text-center text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                  type="text"
-                  value={this.state.inputValue}
-                  onChange={(e) => this.updateInput(e.target.value)}
-                  placeholder="Enter new assignee's name"
-                />
-                <Button
-                  disabled={!this.state.inputValue}
-                  type="submit" class="btn btn-primary"
-                  onClick={() => this.addAssignee()}
-                >
-                  +
-              </Button>
-              </InputGroup>
-            </Form.Row>
-          </Form>
-          <Row>
 
             <ListGroup variant="flush">
               <FlipMove duration={350} easing="ease-out">
                 {this.props.assignees.map((assignee) => {
                   return (
-                    <InputGroup>
-                      <input
-                        class="bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                        type="text"
-                        value={assignee.name}
-                        onChange={(e) => this.props.onChange(assignee.id, 'name', e.target.value)}
-                        onFocus={this.handleFocus}
-                        onBlur={() => this.handleBlur(assignee)}
-                      />
-                      {this.state.editing && (
-                        <button
-                          className="btn btn-sm m-2"
-                          onClick={() => this.props.onDelete(assignee.id)}
-                          onMouseDown={(e) => e.preventDefault()}
-                        >
-                          ❌
-                        </button>
-                      )}
-                    </InputGroup>
+                    <form
+                      class="w-full max-w-lg"
+                      onSubmit={(e) => e.preventDefault()}
+                    >
+                      <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
+                        <input
+                          class="bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                          type="text"
+                          value={assignee.name}
+                          onChange={(e) => this.props.onChange(assignee.id, 'name', e.target.value)}
+                          onFocus={this.handleFocus}
+                          onBlur={() => this.handleBlur(assignee)}
+                        />
+                        {this.state.editing && (
+                          <button
+                            className="btn btn-sm m-2"
+                            onClick={() => this.props.onDelete(assignee.id)}
+                            onMouseDown={(e) => e.preventDefault()}
+                          >
+                            ❌
+                          </button>
+                        )}
+                      </div>
+                    </form>
                   );
                 })}
               </FlipMove>
             </ListGroup>
-          </Row>
-        </Modal.Body>
+
+          </Modal.Body>
+        </div>
         <Modal.Footer>
           <Button
             type="submit"

@@ -162,6 +162,7 @@ export class App extends React.Component {
           <Confetti
             recycle={false}
             style={{ position: 'fixed' }}
+            numberOfPieces={1500}
             onConfettiComplete={this.handleConfettiComplete}
           />
         )}

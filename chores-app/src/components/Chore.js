@@ -14,9 +14,7 @@ export class Chore extends React.Component {
   }
 
   handleBlur = () => {
-    // setTimeout(() => {
     this.setState({ editing: false });
-    // }, 100);
   }
 
   render() {
