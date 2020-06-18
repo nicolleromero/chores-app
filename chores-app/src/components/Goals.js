@@ -33,7 +33,7 @@ export class Goals extends React.Component {
     const newGoal = {
       id: Math.random().toString(36).slice(2),
       value: '',
-      assignee: this.props.assignee,
+      assignee: this.props.assignee.id,
       complete: false,
       points: 0,
     }

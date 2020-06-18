@@ -10,24 +10,43 @@ import { SetupModal } from './SetupModal';
 
 export class App extends React.Component {
   state = {
-    assignees: ['Sam', 'Ari'],
+    assignees: [
+      { id: '1', name: 'Sam' },
+      { id: '2', name: 'Ari' }
+    ],
     list: [],
     goalList: [],
     showConfetti: false,
     showSetupModal: false,
   }
 
-  handleAddItem = (newItem) => {
-    const list = [...this.state.list, newItem];
+  handleAddItem = (newChore) => {
+    const list = [...this.state.list, newChore];
 
     this.setState({ list });
   }
 
-  handleAddAssignee = (newKid) => {
-    const assignees = [...this.state.assignees, newKid];
+  handleAddAssignee = (newAssignee) => {
+    console.log('Triggered handleAddAssignee');
+    const assignees = [...this.state.assignees, newAssignee];
 
     this.setState({ assignees });
+  };
+
+  handleChangeAssignee = (assigneeId, key, value) => {
+    const assignees = this.state.assignees.map((assignee) => {
+      if (assignee.id === assigneeId) {
+        return { ...assignee, [key]: value };
+      }
+      return assignee;
+    });
+    this.setState({ assignees });
   }
+
+  handleDeleteAssignee = (assigneeId) => {
+    const assignees = this.state.assignees.filter((c) => c.id !== assigneeId);
+    this.setState({ assignees });
+  };
 
   handleAddGoal = (newGoal) => {
     this.setState((state) => {
@@ -74,6 +93,10 @@ export class App extends React.Component {
     this.setState({ showSetupModal: true });
   }
 
+  handleCloseSetup = () => {
+    this.setState({ showSetupModal: false });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -113,10 +136,10 @@ export class App extends React.Component {
                   <KidCard
                     assignee={assignee}
                     list={this.state.list.filter((chore) => {
-                      return chore.assignee === assignee;
+                      return chore.assignee === assignee.id;
                     })}
                     goalList={this.state.goalList.filter((goal) => {
-                      return goal.assignee === assignee;
+                      return goal.assignee === assignee.id;
                     })}
                     onDelete={this.handleDelete}
                     onChange={this.handleChange}
@@ -142,6 +165,15 @@ export class App extends React.Component {
             onConfettiComplete={this.handleConfettiComplete}
           />
         )}
+
+        <SetupModal
+          show={this.state.showSetupModal}
+          assignees={this.state.assignees}
+          onHide={this.handleCloseSetup}
+          onDelete={this.handleDeleteAssignee}
+          onChange={this.handleChangeAssignee}
+          onAddAssignee={this.handleAddAssignee}
+        />
 
       </React.Fragment>
     );

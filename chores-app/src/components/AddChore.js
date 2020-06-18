@@ -8,14 +8,14 @@ export class AddChore extends React.Component {
   state = {
     inputValue: '',
     inputPoints: '',
-    assignee: null,
+    assigneeId: null,
   }
 
   addItem() {
     const newItem = {
       id: Date.now(),
-      value: this.state.inputValue,
-      assignee: this.state.assignee,
+      value: this.state.inputValue.trim(),
+      assignee: this.state.assigneeId,
       complete: false,
       points: Number(this.state.inputPoints),
     }
@@ -25,28 +25,33 @@ export class AddChore extends React.Component {
     this.setState({
       inputValue: '',
       inputPoints: '',
+      assigneeId: '',
     });
   }
 
   updateInput(value) {
     this.setState({
-      inputValue: value,
+      inputValue: value.trimStart(),
     });
   }
 
   updatePoints(value) {
     this.setState({
-      inputPoints: value,
+      inputPoints: value.replace(/^0+|\D/g, ''),
     });
   }
 
   updateAssignee(value) {
     this.setState({
-      assignee: value,
+      assigneeId: value,
     });
   }
 
   render() {
+    let currentAssignee = this.props.assignees.find((assignee) => {
+      return assignee.id === this.state.assigneeId;
+    })
+
     return (
       <div>
         <div class="card-header">
@@ -67,14 +72,16 @@ export class AddChore extends React.Component {
                   <DropdownButton
                     as={InputGroup.Append}
                     variant="outline-secondary"
-                    title={this.state.assignee || 'Assignee'}
+                    title={currentAssignee ? currentAssignee.name : 'Assignee'}
                     id="input-group-dropdown"
-                    value={this.state.assignee}
+                    value={this.state.assigneeId}
                     onSelect={(key) => this.updateAssignee(key)}
                   >
-                    {this.props.assignees.map((kid) => {
+                    {this.props.assignees.map((assignee) => {
                       return (
-                        <Dropdown.Item key={kid} eventKey={kid}>{kid}</Dropdown.Item>
+                        <Dropdown.Item key={assignee.id} eventKey={assignee.id}>
+                          {assignee.name}
+                        </Dropdown.Item>
                       )
                     })}
                   </DropdownButton>
@@ -92,7 +99,11 @@ export class AddChore extends React.Component {
                 </InputGroup>
               </Col>
               <Button
-                disabled={!this.state.assignee || !this.state.inputValue || !this.state.inputPoints || this.state.inputPoints < 0}
+                disabled={
+                  !this.state.assigneeId ||
+                  !this.state.inputValue ||
+                  !this.state.inputPoints
+                }
                 type="submit" class="btn btn-primary"
                 onClick={() => this.addItem()}
               >
