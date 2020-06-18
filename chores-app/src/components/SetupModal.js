@@ -29,6 +29,10 @@ export class SetupModal extends React.Component {
     });
   }
 
+  updateBoardName(value) {
+    this.props.onChangeBoardName(value.trimStart());
+  }
+
   handleFocus = () => {
     this.setState({ editing: true });
   }
@@ -48,7 +52,7 @@ export class SetupModal extends React.Component {
         onHide={this.props.onHide}
       >
         <Modal.Header className="align-items-center">
-          <h4 class="chore-maintitle text-center align-items-center">😀 Add Assignees</h4>
+          <h4 class="chore-maintitle text-center align-items-center">👨‍👩‍👧‍👦 Update Board Name</h4>
         </Modal.Header>
         <div class="card-body text-center">
           <Modal.Body>
@@ -58,9 +62,30 @@ export class SetupModal extends React.Component {
                   <Form.Control
                     class="appearance-none bg-transparent border-none w-full text-center text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                     type="text"
-                    value={this.state.inputValue}
+                    value={this.props.boardName}
+                    onChange={(e) => this.updateBoardName(e.target.value)}
+                    placeholder="Enter name for board"
+                  />
+                </InputGroup>
+              </Form.Row>
+            </Form>
+          </Modal.Body>
+        </div>
+
+        <Modal.Header className="align-items-center">
+          <h4 class="chore-maintitle text-center align-items-center">😀 Update Assignees</h4>
+        </Modal.Header>
+        <div class="card-body text-center">
+          <Modal.Body>
+            <Form onSubmit={(e) => e.preventDefault()}>
+              <Form.Row controlId="formBasicEmail">
+                <InputGroup className="align-items-center">
+                  <Form.Control
+                    class="appearance-none bg-transparent border-none w-full text-center text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    type="text"
+                    value={this.state.inputBoardNamee}
                     onChange={(e) => this.updateInput(e.target.value)}
-                    placeholder="Enter new assignee's name"
+                    placeholder="Enter new assignee's name 👋"
                   />
                   <Button
                     disabled={!this.state.inputValue}
