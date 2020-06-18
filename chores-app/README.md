@@ -1,3 +1,19 @@
+Welcome! Here are a few pointers to get you started using the Family Chores App.
+
+1. To customize your experience, click on the gear icon in the upper right of the screen. There, you'll be able to update the name of your board and the family members you'd like to include.
+2. Add a goal and a point value for that goal at the bottom of each family member's card (hint: look for the rocket).
+3. Add chores with appropriate point values and assign them to a family member ("assignee").
+4. When you complete a chore, don't forget to check it off!
+5. When you achieve the point value for your goal, have a little celebration! 🎉
+
+
+Special thanks to the following sites and helpful tutorials:
+"React for Beginners - Build a Todo-List App", Sam Gamage (https://www.youtube.com/watch?v=nUl5QLkVdvU)
+"Building an Awesome Todo List App in React" by kirupa (https://www.youtube.com/watch?v=nUl5QLkVdvU)
+"React Tutorial - Learn React - React Crash Course [2019]", Programming with Mosh (https://www.youtube.com/watch?v=Ke90Tje7VS0&feature=youtu.be)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
