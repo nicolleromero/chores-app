@@ -1,7 +1,5 @@
 import React from 'react';
-import { Button, InputGroup, FormControl, ListGroup } from 'react-bootstrap';
 import { GoalProgressBar } from './GoalProgressBar'
-import FlipMove from 'react-flip-move';
 
 import './Goals.css';
 
@@ -26,6 +24,15 @@ export class Goals extends React.Component {
       prevProps.completedPoints < prevProps.goal.points
     ) {
       this.props.onGoalCompleted();
+
+      this.updateGoalComplete(this.props.goal.id);
+
+    }
+  }
+
+  updateGoalComplete(goalId) {
+    if (this.props.goal.id === goalId) {
+      this.props.goal.complete = true;
     }
   }
 
@@ -47,35 +54,37 @@ export class Goals extends React.Component {
     }
 
     return (
-      <div>
-        <div class="card-header">
-          <h4 class="chore-maintitle text-center">
-            🚀 Current Goal
-          </h4>
-        </div>
-        <div class="card-body">
-          <InputGroup className="align-items-center">
-            <FormControl
+      <React.Fragment>
+        <form class="w-full max-w-lg">
+          <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
               type="text"
               placeholder="Type goal here"
               value={this.props.goal.value}
               onChange={(e) => this.props.onChangeGoal(this.props.goal.id, 'value', e.target.value)}
             />
-            <FormControl
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 leading-tight focus:outline-none points-input"
               type="text"
-              placeholder="Total Points to Achieve Goal"
-              value={this.props.goal.points}
-              onChange={(e) => this.props.onChangeGoal(this.props.goal.id, 'points', e.target.value)}
+              placeholder="Points"
+              value={this.props.goal.points || ''}
+              onChange={(e) => this.props.onChangeGoal(this.props.goal.id, 'points', Number(e.target.value))}
             />
-          </InputGroup>
-        </div>
+          </div>
+        </form>
         <div class="card-body text-center">
-          <GoalProgressBar
-            className="align-items-center"
-            percentage={this.props.completedPoints / this.props.goal.points}
-          />
+          {this.props.goal.points !== 0 && !this.props.goal.complete && ( //Added this wonky thing to try
+            <GoalProgressBar
+              className="align-items-center"
+              percentage={this.props.completedPoints / this.props.goal.points}
+              value={this.props.goal.complete}
+              onGoalCompleted={(e) => this.props.updateGoalComplete(this.props.goal.id)}
+            />
+          )}
         </div>
-      </div >
+
+      </React.Fragment>
     );
   }
 }

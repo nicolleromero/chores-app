@@ -20,7 +20,10 @@ export class Chore extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <form class="w-full max-w-lg">
+        <form
+          class="w-full max-w-lg"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
             <input class="mr-2 leading-tight" type="checkbox"
               checked={this.props.item.complete}

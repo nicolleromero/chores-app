@@ -11,7 +11,7 @@ export class GoalProgressBar extends React.Component {
     } else if (now >= 100) {
       return 100;
     } else {
-      return now;
+      return Number(now);
     }
   }
 

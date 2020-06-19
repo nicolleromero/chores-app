@@ -9,7 +9,7 @@ export class KidCard extends React.Component {
   calculatePointsTotal() {
     return this.props.list
       .filter((chore) => chore.complete)
-      .reduce((sum, chore) => sum + chore.points, 0);
+      .reduce((sum, chore) => sum + Number(chore.points), 0);
   }
 
   render() {

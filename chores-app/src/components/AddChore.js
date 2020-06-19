@@ -108,7 +108,7 @@ export class AddChore extends React.Component {
                 onClick={() => this.addItem()}
               >
                 +
-              </Button>
+      </Button>
             </Form.Row>
           </Form>
         </div>
