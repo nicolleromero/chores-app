@@ -9,14 +9,21 @@ export class GoalLists extends React.Component {
 
   render() {
     let completedGoalsList = [];
-    let uncompletedGoalsList = [];
+    let incompleteGoalsList = [];
 
-    for (let item of this.props.goalList) {
-      if (item['complete']) {
-        completedGoalsList.push(item);
+    let remainingPoints = this.props.completedPoints;
+
+    for (let goal of this.props.goalList) {
+      if (goal.points && remainingPoints - goal.points >= 0) {
+        completedGoalsList.push(goal);
+        remainingPoints = remainingPoints - goal.points;
       } else {
-        uncompletedGoalsList.push(item);
+        incompleteGoalsList.push(goal);
       }
+    }
+
+    if (!incompleteGoalsList.length) {
+      incompleteGoalsList.push(null);
     }
 
     return (
@@ -29,14 +36,18 @@ export class GoalLists extends React.Component {
         <div class="card-body text-center">
           <ListGroup variant="flush">
             <FlipMove duration={350} easing="ease-out">
-              <Goals
-                assignee={this.props.assignee}
-                goal={uncompletedGoalsList[0]}
-                completedPoints={this.props.completedPoints}
-                onAddGoal={this.props.onAddGoal}
-                onChangeGoal={this.props.onChangeGoal}
-                onGoalCompleted={this.props.onGoalCompleted}
-              />
+              {incompleteGoalsList.map(item => {
+                return (
+                  <Goals
+                    assignee={this.props.assignee}
+                    goal={item}
+                    completedPoints={remainingPoints}
+                    onAddGoal={this.props.onAddGoal}
+                    onChangeGoal={this.props.onChangeGoal}
+                    onGoalCompleted={this.props.onGoalCompleted}
+                  />
+                );
+              })}
             </FlipMove>
           </ListGroup>
         </div>
@@ -45,13 +56,15 @@ export class GoalLists extends React.Component {
           <ListGroup variant="flush">
             <div className="align-text-center completedgoals-title">
               Completed goals
-          </div>
+            </div>
             <FlipMove duration={350} easing="ease-out">
               {completedGoalsList.map(item => {
                 return (
                   <Goals
                     assignee={this.props.assignee}
                     goal={item}
+                    completedGoalsList={this.props.completedGoalsList}
+                    incompleteGoalsList={this.props.incompleteGoalsList}
                     completedPoints={this.props.completedPoints}
                     onAddGoal={this.props.onAddGoal}
                     onChangeGoal={this.props.onChangeGoal}

@@ -24,15 +24,6 @@ export class Goals extends React.Component {
       prevProps.completedPoints < prevProps.goal.points
     ) {
       this.props.onGoalCompleted();
-
-      this.updateGoalComplete(this.props.goal.id);
-
-    }
-  }
-
-  updateGoalComplete(goalId) {
-    if (this.props.goal.id === goalId) {
-      this.props.goal.complete = true;
     }
   }
 
@@ -55,7 +46,10 @@ export class Goals extends React.Component {
 
     return (
       <React.Fragment>
-        <form class="w-full max-w-lg">
+        <form
+          class="w-full max-w-lg"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
             <input
               class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
@@ -74,16 +68,14 @@ export class Goals extends React.Component {
           </div>
         </form>
         <div class="card-body text-center">
-          {this.props.goal.points !== 0 && !this.props.goal.complete && ( //Added this wonky thing to try
-            <GoalProgressBar
-              className="align-items-center"
-              percentage={this.props.completedPoints / this.props.goal.points}
-              value={this.props.goal.complete}
-              onGoalCompleted={(e) => this.props.updateGoalComplete(this.props.goal.id)}
-            />
-          )}
+          {/* {this.props.goal && this.props.completedGoalsList && !this.props.completedGoalsList.includes(this.props.goal.id) && ( */}
+          <GoalProgressBar
+            className="align-items-center"
+            percentage={this.props.completedPoints / this.props.goal.points}
+            onGoalCompleted={(e) => this.props.updateGoalComplete(this.props.goal.id)}
+          />
+          {/* )} */}
         </div>
-
       </React.Fragment>
     );
   }
