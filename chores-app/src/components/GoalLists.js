@@ -2,7 +2,8 @@ import React from "react";
 import FlipMove from 'react-flip-move';
 import { ListGroup } from 'react-bootstrap';
 
-import { Goals } from './Goals'
+import { Goals } from './Goals';
+import { GoalProgressBar } from './GoalProgressBar';
 import './GoalLists.css';
 
 export class GoalLists extends React.Component {
@@ -36,17 +37,27 @@ export class GoalLists extends React.Component {
         <div class="card-body text-center">
           <ListGroup variant="flush">
             <FlipMove duration={350} easing="ease-out">
-              {incompleteGoalsList.map(item => {
+              {incompleteGoalsList.map((goal, index) => {
                 return (
-                  <Goals
-                    assignee={this.props.assignee}
-                    goal={item}
-                    completedPoints={remainingPoints}
-                    onAddGoal={this.props.onAddGoal}
-                    onChangeGoal={this.props.onChangeGoal}
-                    onGoalCompleted={this.props.onGoalCompleted}
-                  />
-                );
+                  <div>
+                    <Goals
+                      assignee={this.props.assignee}
+                      goal={goal}
+                      completedPoints={remainingPoints}
+                      onAddGoal={this.props.onAddGoal}
+                      onChangeGoal={this.props.onChangeGoal}
+                      onGoalCompleted={this.props.onGoalCompleted}
+                    />
+                    {index === 0 && goal && (
+                      <div class="card-body text-center">
+                        <GoalProgressBar
+                          className="align-items-center"
+                          percentage={remainingPoints / goal.points}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
               })}
             </FlipMove>
           </ListGroup>

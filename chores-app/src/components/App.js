@@ -8,17 +8,37 @@ import { SetupModal } from './SetupModal';
 
 // import './tailwind.generated.css';
 
+const STORAGE_KEY = 'ChoresApp';
+
+function getLocalStorage() {
+  const value = window.localStorage.getItem(STORAGE_KEY);
+  return value ? JSON.parse(value) : {};
+}
+
+function setLocalStorage(state) {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
 export class App extends React.Component {
+
   state = {
     boardName: 'Family',
-    assignees: [
-      { id: '1', name: 'Sam' },
-      { id: '2', name: 'Ari' },
-    ],
+    assignees: [],
     list: [],
     goalList: [],
     showConfetti: false,
     showSetupModal: false,
+    ...getLocalStorage()
+  }
+
+  componentDidMount() {
+    if (!this.state.assignees.length) {
+      this.setState({ showSetupModal: true });
+    }
+  }
+
+  componentDidUpdate() {
+    setLocalStorage(this.state);
   }
 
   handleSetBoardName = (chosenName) => {
