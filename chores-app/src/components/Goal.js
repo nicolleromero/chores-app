@@ -1,7 +1,9 @@
 import React from 'react';
 
-import './Goal.css';
+import { DeleteButton } from './DeleteButton';
 import { Points } from './Points';
+
+import './Goal.css';
 
 export class Goal extends React.Component {
   state = {
@@ -33,13 +35,9 @@ export class Goal extends React.Component {
             onBlur={this.handleBlur}
           />
           {this.state.editing && (
-            <button
-              className="btn btn-sm m-2"
+            <DeleteButton
               onClick={() => this.props.onDelete(this.props.goal.id)}
-              onMouseDown={(e) => e.preventDefault()}
-            >
-              ❌
-            </button>
+            />
           )}
           <Points
             value={this.props.goal.points}

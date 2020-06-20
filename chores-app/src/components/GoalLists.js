@@ -44,13 +44,11 @@ export class GoalLists extends React.Component {
         </div>
         <div class="card-body text-center">
           <ListGroup variant="flush">
-            {/* <FlipMove duration={350} easing="ease-out"> */}
             {this.props.incompleteGoalsList.map((goal, index) => {
               return (index === 0 || goal.value) && (
                 <div>
                   <Goal
                     key={goal.id}
-                    assignee={this.props.assignee}
                     goal={goal}
                     onChange={this.props.onChangeGoal}
                     onDelete={this.props.onDeleteGoal}
@@ -66,7 +64,6 @@ export class GoalLists extends React.Component {
                 </div>
               )
             })}
-            {/* </FlipMove> */}
           </ListGroup>
         </div>
 
@@ -75,23 +72,19 @@ export class GoalLists extends React.Component {
             <div className="align-text-center completedgoals-title">
               Completed goals
             </div>
-            {/* <FlipMove duration={350} easing="ease-out"> */}
             {this.props.completedGoalsList.map((goal) => {
               return (
                 <Goal
                   key={goal.id}
-                  assignee={this.props.assignee}
                   goal={goal}
-                  onDeleteGoal={this.props.onDeleteGoal}
-                  onChangeGoal={this.props.onChangeGoal}
+                  onDelete={this.props.onDeleteGoal}
+                  onChange={this.props.onChangeGoal}
                 />
               );
             })}
-            {/* </FlipMove> */}
           </ListGroup>
         </div>
       </div>
     );
   }
-
 }
