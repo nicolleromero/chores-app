@@ -83,7 +83,7 @@ export class SetupModal extends React.Component {
                   <Form.Control
                     class="appearance-none bg-transparent border-none w-full text-center text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                     type="text"
-                    value={this.state.inputBoardNamee}
+                    value={this.state.inputValue}
                     onChange={(e) => this.updateInput(e.target.value)}
                     placeholder="Enter new assignee's name 👋"
                   />

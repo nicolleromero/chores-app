@@ -25,7 +25,6 @@ export class AddChore extends React.Component {
     this.setState({
       inputValue: '',
       inputPoints: '',
-      assigneeId: '',
     });
   }
 

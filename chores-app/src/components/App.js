@@ -54,7 +54,6 @@ export class App extends React.Component {
   }
 
   handleAddAssignee = (newAssignee) => {
-    console.log('Triggered handleAddAssignee');
     const assignees = [...this.state.assignees, newAssignee];
 
     this.setState({ assignees });

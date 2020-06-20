@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Goals.css';
+import { Points } from './Points';
 
 export class Goals extends React.Component {
 
@@ -56,11 +57,8 @@ export class Goals extends React.Component {
             value={this.props.goal.value}
             onChange={(e) => this.props.onChangeGoal(this.props.goal.id, 'value', e.target.value)}
           />
-          <input
-            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 leading-tight focus:outline-none points-input"
-            type="text"
-            placeholder="Points"
-            value={this.props.goal.points || ''}
+          <Points
+            value={this.props.goal.points}
             onChange={(e) => this.props.onChangeGoal(this.props.goal.id, 'points', Number(e.target.value))}
           />
         </div>
