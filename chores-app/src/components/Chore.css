@@ -1,3 +1,7 @@
 .points-input {
   width: 55px;
 }
+
+.delete-button {
+  padding: 0 8px;
+}

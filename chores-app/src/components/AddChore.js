@@ -86,7 +86,6 @@ export class AddChore extends React.Component {
                   </DropdownButton>
                 </InputGroup>
               </Col>
-
               <Col sm="auto">
                 <InputGroup>
                   <FormControl
@@ -107,7 +106,7 @@ export class AddChore extends React.Component {
                 onClick={() => this.addItem()}
               >
                 +
-      </Button>
+              </Button>
             </Form.Row>
           </Form>
         </div>

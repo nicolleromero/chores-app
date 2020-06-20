@@ -33,7 +33,7 @@ export class ChoreList extends React.Component {
     let doneList = [];
     let undoneList = [];
 
-    for (let item of this.props.list) {
+    for (let item of this.props.choreList) {
       if (item['complete']) {
         doneList.push(item);
       } else {

@@ -1,34 +1,40 @@
 import React from "react";
-import FlipMove from 'react-flip-move';
 import { ListGroup } from 'react-bootstrap';
 
-import { Goals } from './Goals';
+import { Goal } from './Goal';
 import { GoalProgressBar } from './GoalProgressBar';
 import './GoalLists.css';
 
 export class GoalLists extends React.Component {
 
+  addGoal() {
+    const newGoal = {
+      id: Math.random().toString(36).slice(2),
+      value: '',
+      assignee: this.props.assignee.id,
+      complete: false,
+      points: 0,
+    }
+
+    this.props.onAddGoal(newGoal);
+  }
+
+  componentDidMount() {
+    if (!this.props.incompleteGoalsList.length) {
+      this.addGoal();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.completedGoalsList.length > prevProps.completedGoalsList.length) {
+      this.props.onGoalCompleted();
+    }
+    if (!this.props.incompleteGoalsList.length) {
+      this.addGoal();
+    }
+  }
+
   render() {
-    let completedGoalsList = [];
-    let incompleteGoalsList = [];
-
-    let remainingPoints = this.props.completedPoints;
-    let incomplete = false;
-
-    for (let goal of this.props.goalList) {
-      if (!incomplete && goal.points && remainingPoints >= goal.points) {
-        completedGoalsList.push(goal);
-        remainingPoints = remainingPoints - goal.points;
-      } else {
-        incompleteGoalsList.push(goal);
-        incomplete = true;
-      }
-    }
-
-    if (!incompleteGoalsList.length) {
-      incompleteGoalsList.push(null);
-    }
-
     return (
       <div class="card shadow-sm">
         <div class="card-header">
@@ -39,23 +45,21 @@ export class GoalLists extends React.Component {
         <div class="card-body text-center">
           <ListGroup variant="flush">
             {/* <FlipMove duration={350} easing="ease-out"> */}
-            {incompleteGoalsList.map((goal, index) => {
+            {this.props.incompleteGoalsList.map((goal, index) => {
               return (index === 0 || goal.value) && (
                 <div>
-                  <Goals
-                    key={goal ? goal.id : index}
+                  <Goal
+                    key={goal.id}
                     assignee={this.props.assignee}
                     goal={goal}
-                    completedPoints={remainingPoints}
-                    onAddGoal={this.props.onAddGoal}
-                    onChangeGoal={this.props.onChangeGoal}
-                    onGoalCompleted={this.props.onGoalCompleted}
+                    onChange={this.props.onChangeGoal}
+                    onDelete={this.props.onDeleteGoal}
                   />
-                  {index === 0 && goal && (
+                  {index === 0 && (
                     <div class="card-body text-center">
                       <GoalProgressBar
                         className="align-items-center"
-                        percentage={goal.points ? remainingPoints / goal.points : 0}
+                        percentage={goal.points ? this.props.completedPoints / goal.points : 0}
                       />
                     </div>
                   )}
@@ -72,18 +76,14 @@ export class GoalLists extends React.Component {
               Completed goals
             </div>
             {/* <FlipMove duration={350} easing="ease-out"> */}
-            {completedGoalsList.map((goal) => {
+            {this.props.completedGoalsList.map((goal) => {
               return (
-                <Goals
+                <Goal
                   key={goal.id}
                   assignee={this.props.assignee}
                   goal={goal}
-                  completedGoalsList={this.props.completedGoalsList}
-                  incompleteGoalsList={this.props.incompleteGoalsList}
-                  completedPoints={this.props.completedPoints}
-                  onAddGoal={this.props.onAddGoal}
+                  onDeleteGoal={this.props.onDeleteGoal}
                   onChangeGoal={this.props.onChangeGoal}
-                  onGoalCompleted={this.props.onGoalCompleted}
                 />
               );
             })}

@@ -1,12 +1,10 @@
 import React from 'react';
 import Confetti from 'react-confetti'
 
-import { KidCard } from './KidCard';
 import { Title } from './Title';
-import { AddChore } from './AddChore';
 import { SetupModal } from './SetupModal';
-
-// import './tailwind.generated.css';
+import { KidCard } from './KidCard';
+import { AddChore } from './AddChore';
 
 const STORAGE_KEY = 'ChoresApp';
 
@@ -20,11 +18,10 @@ function setLocalStorage(state) {
 }
 
 export class App extends React.Component {
-
   state = {
-    boardName: 'Family',
+    boardName: '',
     assignees: [],
-    list: [],
+    choreList: [],
     goalList: [],
     showConfetti: false,
     showSetupModal: false,
@@ -48,9 +45,9 @@ export class App extends React.Component {
   }
 
   handleAddItem = (newChore) => {
-    const list = [...this.state.list, newChore];
+    const choreList = [...this.state.choreList, newChore];
 
-    this.setState({ list });
+    this.setState({ choreList });
   }
 
   handleAddAssignee = (newAssignee) => {
@@ -82,6 +79,11 @@ export class App extends React.Component {
     });
   }
 
+  handleDeleteGoal = (goalId) => {
+    const goalList = this.state.goalList.filter((c) => c.id !== goalId);
+    this.setState({ goalList });
+  };
+
   handleChangeGoal = (goalId, key, value) => {
     const goalList = this.state.goalList.map((goal) => {
       if (goal.id === goalId) {
@@ -92,19 +94,19 @@ export class App extends React.Component {
     this.setState({ goalList });
   }
 
-  handleDelete = (itemId) => {
-    const list = this.state.list.filter((c) => c.id !== itemId);
-    this.setState({ list });
+  handleDeleteChore = (itemId) => {
+    const choreList = this.state.choreList.filter((c) => c.id !== itemId);
+    this.setState({ choreList });
   };
 
   handleChange = (itemId, key, value) => {
-    const list = this.state.list.map((listItem) => {
+    const choreList = this.state.choreList.map((listItem) => {
       if (listItem.id === itemId) {
         return { ...listItem, [key]: value };
       }
       return listItem;
     });
-    this.setState({ list });
+    this.setState({ choreList });
   }
 
   handleGoalCompleted = () => {
@@ -163,15 +165,16 @@ export class App extends React.Component {
                 return (
                   <KidCard
                     assignee={assignee}
-                    list={this.state.list.filter((chore) => {
+                    choreList={this.state.choreList.filter((chore) => {
                       return chore.assignee === assignee.id;
                     })}
                     goalList={this.state.goalList.filter((goal) => {
                       return goal.assignee === assignee.id;
                     })}
-                    onDelete={this.handleDelete}
+                    onDelete={this.handleDeleteChore}
                     onChange={this.handleChange}
                     onAddGoal={this.handleAddGoal}
+                    onDeleteGoal={this.handleDeleteGoal}
                     onChangeGoal={this.handleChangeGoal}
                     onGoalCompleted={this.handleGoalCompleted}
                   />

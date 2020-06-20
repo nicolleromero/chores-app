@@ -7,26 +7,44 @@ import { GoalLists } from './GoalLists';
 export class KidCard extends React.Component {
 
   calculatePointsTotal() {
-    return this.props.list
+    return this.props.choreList
       .filter((chore) => chore.complete)
       .reduce((sum, chore) => sum + Number(chore.points), 0);
   }
 
   render() {
+    let completedGoalsList = [];
+    let incompleteGoalsList = [];
+
+    let remainingPoints = this.calculatePointsTotal();
+    let incomplete = false;
+
+    for (let goal of this.props.goalList) {
+      if (!incomplete && goal.points && remainingPoints >= goal.points) {
+        completedGoalsList.push(goal);
+        remainingPoints = remainingPoints - goal.points;
+      } else {
+        incompleteGoalsList.push(goal);
+        incomplete = true;
+      }
+    }
+
     return (
       <Col xs={6}>
         <ChoreList
           assignee={this.props.assignee}
-          list={this.props.list}
+          choreList={this.props.choreList}
           onDelete={this.props.onDelete}
           onChange={this.props.onChange}
         />
 
         <GoalLists
           assignee={this.props.assignee}
-          completedPoints={this.calculatePointsTotal()}
-          goalList={this.props.goalList}
+          completedPoints={remainingPoints}
+          completedGoalsList={completedGoalsList}
+          incompleteGoalsList={incompleteGoalsList}
           onAddGoal={this.props.onAddGoal}
+          onDeleteGoal={this.props.onDeleteGoal}
           onChangeGoal={this.props.onChangeGoal}
           onGoalCompleted={this.props.onGoalCompleted}
         />

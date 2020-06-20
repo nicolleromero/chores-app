@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import FlipMove from 'react-flip-move';
 import { Button, Form, InputGroup, ListGroup, Modal } from 'react-bootstrap';
@@ -132,7 +131,6 @@ export class SetupModal extends React.Component {
                 })}
               </FlipMove>
             </ListGroup>
-
           </Modal.Body>
         </div>
         <Modal.Footer>
