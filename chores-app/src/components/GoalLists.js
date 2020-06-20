@@ -72,15 +72,26 @@ export class GoalLists extends React.Component {
             <div className="align-text-center completedgoals-title">
               Completed goals
             </div>
-            {this.props.completedGoalsList.map((goal) => {
+            {this.props.completedGoalsList.map((goal, index) => {
               return (
-                <Goal
-                  key={goal.id}
-                  goal={goal}
-                  onDelete={this.props.onDeleteGoal}
-                  onChange={this.props.onChangeGoal}
-                />
-              );
+                <div>
+                  <Goal
+                    key={goal.id}
+                    goal={goal}
+                    onDelete={this.props.onDeleteGoal}
+                    onChange={this.props.onChangeGoal}
+                  />
+                  {/* Added logic to show 100% bar for first goal in completed list */}
+                  {index === 0 && this.props.incompleteGoalsList[0] && !this.props.incompleteGoalsList[0].points && (
+                    <div class="card-body text-center">
+                      <GoalProgressBar
+                        className="align-items-center"
+                        percentage={1}
+                      />
+                    </div>
+                  )}
+                </div>
+              )
             })}
           </ListGroup>
         </div>

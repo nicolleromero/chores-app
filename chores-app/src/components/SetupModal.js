@@ -2,6 +2,10 @@ import React from 'react';
 import FlipMove from 'react-flip-move';
 import { Button, Form, InputGroup, ListGroup, Modal } from 'react-bootstrap';
 
+import { DeleteButton } from './DeleteButton';
+
+import './SetupModal.css';
+
 
 export class SetupModal extends React.Component {
   state = {
@@ -98,39 +102,39 @@ export class SetupModal extends React.Component {
               </Form.Row>
             </Form>
 
-
-            <ListGroup variant="flush">
-              <FlipMove duration={350} easing="ease-out">
-                {this.props.assignees.map((assignee) => {
-                  return (
-                    <form
-                      class="w-full max-w-lg"
-                      onSubmit={(e) => e.preventDefault()}
-                    >
-                      <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
-                        <input
-                          class="bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                          type="text"
-                          value={assignee.name}
-                          onChange={(e) => this.props.onChange(assignee.id, 'name', e.target.value)}
-                          onFocus={this.handleFocus}
-                          onBlur={() => this.handleBlur(assignee)}
-                        />
-                        {this.state.editing && (
-                          <button
-                            className="btn btn-sm m-2"
-                            onClick={() => this.props.onDelete(assignee.id)}
-                            onMouseDown={(e) => e.preventDefault()}
-                          >
-                            ❌
-                          </button>
-                        )}
-                      </div>
-                    </form>
-                  );
-                })}
-              </FlipMove>
-            </ListGroup>
+            <div class="card-body text-center">
+              <ListGroup variant="flush">
+                <div className="align-text-center current-assignees">
+                  Current Assignees
+              </div>
+                <FlipMove duration={350} easing="ease-out">
+                  {this.props.assignees.map((assignee) => {
+                    return (
+                      <form
+                        class="w-full max-w-lg"
+                        onSubmit={(e) => e.preventDefault()}
+                      >
+                        <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
+                          <input
+                            class="text-center bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                            type="text"
+                            value={assignee.name}
+                            onChange={(e) => this.props.onChange(assignee.id, 'name', e.target.value)}
+                            onFocus={this.handleFocus}
+                            onBlur={() => this.handleBlur(assignee)}
+                          />
+                          {this.state.editing && (
+                            <DeleteButton
+                              onClick={() => this.props.onDelete(assignee.id)}
+                            />
+                          )}
+                        </div>
+                      </form>
+                    );
+                  })}
+                </FlipMove>
+              </ListGroup>
+            </div>
           </Modal.Body>
         </div>
         <Modal.Footer>

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { DeleteButton } from './DeleteButton';
+import { Points } from './Points';
+
 import './Chore.css';
 
 export class Chore extends React.Component {
@@ -37,20 +40,13 @@ export class Chore extends React.Component {
               onBlur={this.handleBlur}
             />
             {this.state.editing && (
-              <button
-                className="btn btn-sm delete-button"
+              <DeleteButton
                 onClick={() => this.props.onDelete(this.props.item.id)}
-                onMouseDown={(e) => e.preventDefault()}
-              >
-                ❌
-              </button>
+              />
             )}
-            <input
-              class="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none points-input"
-              type="text"
-              placeholder="Points"
+            <Points
               value={this.props.item.points}
-              onChange={(e) => this.props.onChange(this.props.item.id, 'points', e.target.value)}
+              onChange={(e) => this.props.onChange(this.props.item.id, 'points', Number(e.target.value))}
             />
           </div>
         </form>

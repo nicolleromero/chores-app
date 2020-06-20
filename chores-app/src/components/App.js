@@ -159,30 +159,30 @@ export class App extends React.Component {
             </div>
           </div>
 
-          <div class="container">
-            <div class="row">
-              {this.state.assignees.map((assignee) => {
-                return (
-                  <KidCard
-                    assignee={assignee}
-                    choreList={this.state.choreList.filter((chore) => {
-                      return chore.assignee === assignee.id;
-                    })}
-                    goalList={this.state.goalList.filter((goal) => {
-                      return goal.assignee === assignee.id;
-                    })}
-                    onDelete={this.handleDeleteChore}
-                    onChange={this.handleChange}
-                    onAddGoal={this.handleAddGoal}
-                    onDeleteGoal={this.handleDeleteGoal}
-                    onChangeGoal={this.handleChangeGoal}
-                    onGoalCompleted={this.handleGoalCompleted}
-                  />
-                )
-              })}
-            </div>
+
+          <div class="row">
+            {this.state.assignees.map((assignee) => {
+              return (
+                <KidCard
+                  assignee={assignee}
+                  choreList={this.state.choreList.filter((chore) => {
+                    return chore.assignee === assignee.id;
+                  })}
+                  goalList={this.state.goalList.filter((goal) => {
+                    return goal.assignee === assignee.id;
+                  })}
+                  onDelete={this.handleDeleteChore}
+                  onChange={this.handleChange}
+                  onAddGoal={this.handleAddGoal}
+                  onDeleteGoal={this.handleDeleteGoal}
+                  onChangeGoal={this.handleChangeGoal}
+                  onGoalCompleted={this.handleGoalCompleted}
+                />
+              )
+            })}
           </div>
         </div>
+
 
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
           <h5 class="my-0 mr-md-auto font-weight-normal"><br /></h5>

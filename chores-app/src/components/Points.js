@@ -23,7 +23,7 @@ export class Points extends React.Component {
   render() {
     return (
       <input
-        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 leading-tight focus:outline-none points-input"
+        class="text-right appearance-none bg-transparent border-none w-full text-gray-700 mr-3 leading-tight focus:outline-none points-input"
         type="text"
         placeholder="Points"
         value={this.state.inputValue == null ? (this.props.value || '') : this.state.inputValue}

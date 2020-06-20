@@ -21,7 +21,7 @@ export class KidCard extends React.Component {
 
     for (let goal of this.props.goalList) {
       if (!incomplete && goal.points && remainingPoints >= goal.points) {
-        completedGoalsList.push(goal);
+        completedGoalsList.unshift(goal);
         remainingPoints = remainingPoints - goal.points;
       } else {
         incompleteGoalsList.push(goal);
