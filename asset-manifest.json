@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.dc4b65bd.chunk.css",
-    "main.js": "/static/js/main.225b67b5.chunk.js",
-    "main.js.map": "/static/js/main.225b67b5.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.7c0ae09a.js",
-    "runtime-main.js.map": "/static/js/runtime-main.7c0ae09a.js.map",
-    "static/css/2.829c9cb5.chunk.css": "/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.9241e10d.chunk.js": "/static/js/2.9241e10d.chunk.js",
-    "static/js/2.9241e10d.chunk.js.map": "/static/js/2.9241e10d.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.712387d49bb9fdbe4f782a2e39f6109e.js": "/precache-manifest.712387d49bb9fdbe4f782a2e39f6109e.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.829c9cb5.chunk.css.map": "/static/css/2.829c9cb5.chunk.css.map",
-    "static/css/main.dc4b65bd.chunk.css.map": "/static/css/main.dc4b65bd.chunk.css.map",
-    "static/js/2.9241e10d.chunk.js.LICENSE.txt": "/static/js/2.9241e10d.chunk.js.LICENSE.txt"
+    "main.css": "/chores-app/static/css/main.2bf584d9.chunk.css",
+    "main.js": "/chores-app/static/js/main.d58c9d39.chunk.js",
+    "main.js.map": "/chores-app/static/js/main.d58c9d39.chunk.js.map",
+    "runtime-main.js": "/chores-app/static/js/runtime-main.b05843aa.js",
+    "runtime-main.js.map": "/chores-app/static/js/runtime-main.b05843aa.js.map",
+    "static/css/2.829c9cb5.chunk.css": "/chores-app/static/css/2.829c9cb5.chunk.css",
+    "static/js/2.86676d1d.chunk.js": "/chores-app/static/js/2.86676d1d.chunk.js",
+    "static/js/2.86676d1d.chunk.js.map": "/chores-app/static/js/2.86676d1d.chunk.js.map",
+    "index.html": "/chores-app/index.html",
+    "precache-manifest.e54dd98fccbc46e8e00ae18cb1d69826.js": "/chores-app/precache-manifest.e54dd98fccbc46e8e00ae18cb1d69826.js",
+    "service-worker.js": "/chores-app/service-worker.js",
+    "static/css/2.829c9cb5.chunk.css.map": "/chores-app/static/css/2.829c9cb5.chunk.css.map",
+    "static/css/main.2bf584d9.chunk.css.map": "/chores-app/static/css/main.2bf584d9.chunk.css.map",
+    "static/js/2.86676d1d.chunk.js.LICENSE.txt": "/chores-app/static/js/2.86676d1d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7c0ae09a.js",
+    "static/js/runtime-main.b05843aa.js",
     "static/css/2.829c9cb5.chunk.css",
-    "static/js/2.9241e10d.chunk.js",
-    "static/css/main.dc4b65bd.chunk.css",
-    "static/js/main.225b67b5.chunk.js"
+    "static/js/2.86676d1d.chunk.js",
+    "static/css/main.2bf584d9.chunk.css",
+    "static/js/main.d58c9d39.chunk.js"
   ]
 }
