@@ -5,3 +5,7 @@
 .delete-button {
   padding: 0 8px;
 }
+
+.list-item {
+  padding: 0 20px 0 20px;
+}

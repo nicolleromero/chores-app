@@ -48,6 +48,7 @@ export class GoalLists extends React.Component {
               return (index === 0 || goal.value) && (
                 <div>
                   <Goal
+                    className="align-items-center"
                     key={goal.id}
                     goal={goal}
                     onChange={this.props.onChangeGoal}
@@ -67,34 +68,36 @@ export class GoalLists extends React.Component {
           </ListGroup>
         </div>
 
-        <div class="card-body text-center">
-          <ListGroup variant="flush">
-            <div className="align-text-center completedgoals-title">
-              Completed goals
+        {this.props.completedGoalsList.length > 0 && (
+          <div class="card-body text-center">
+            <ListGroup variant="flush">
+              <div className="align-text-center completedgoals-title">
+                Completed goals
             </div>
-            {this.props.completedGoalsList.map((goal, index) => {
-              return (
-                <div>
-                  <Goal
-                    key={goal.id}
-                    goal={goal}
-                    onDelete={this.props.onDeleteGoal}
-                    onChange={this.props.onChangeGoal}
-                  />
-                  {/* Added logic to show 100% bar for first goal in completed list */}
-                  {index === 0 && this.props.incompleteGoalsList[0] && !this.props.incompleteGoalsList[0].points && (
-                    <div class="card-body text-center">
-                      <GoalProgressBar
-                        className="align-items-center"
-                        percentage={1}
-                      />
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </ListGroup>
-        </div>
+              {this.props.completedGoalsList.map((goal, index) => {
+                return (
+                  <div>
+                    <Goal
+                      key={goal.id}
+                      goal={goal}
+                      onDelete={this.props.onDeleteGoal}
+                      onChange={this.props.onChangeGoal}
+                    />
+                    {/* Added logic to show 100% bar for first goal in completed list */}
+                    {index === 0 && this.props.incompleteGoalsList[0] && !this.props.incompleteGoalsList[0].points && (
+                      <div class="card-body text-center">
+                        <GoalProgressBar
+                          className="align-items-center"
+                          percentage={1}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </ListGroup>
+          </div>
+        )}
       </div>
     );
   }

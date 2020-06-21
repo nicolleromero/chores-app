@@ -21,7 +21,7 @@ export class Goal extends React.Component {
   render() {
     return (
       <form
-        class="w-full max-w-lg"
+        class="list-item"
         onSubmit={(e) => e.preventDefault()}
       >
         <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
