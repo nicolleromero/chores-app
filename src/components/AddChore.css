@@ -39,3 +39,7 @@
   text-align: center;
   color: #32639c;
 }
+
+.margin {
+  margin: "theme.spacing(1)";
+}

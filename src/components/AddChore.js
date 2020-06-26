@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, FormControl, InputGroup } from 'react-bootstrap';
-
+import TextField from '@material-ui/core/TextField';
 
 import './AddChore.css';
+import { DropdownSelect } from './DropdownSelect';
 
 export class AddChore extends React.Component {
   state = {
@@ -47,10 +48,6 @@ export class AddChore extends React.Component {
   }
 
   render() {
-    let currentAssignee = this.props.assignees.find((assignee) => {
-      return assignee.id === this.state.assigneeId;
-    })
-
     return (
       <div>
         <div class="card-header">
@@ -62,28 +59,20 @@ export class AddChore extends React.Component {
             <Form.Row className="align-items-center">
               <Col lg={true}>
                 <InputGroup className="align-items-center">
-                  <FormControl
-                    type="text"
-                    placeholder="Type chore here"
+                  <TextField
+                    style={{ width: 500 }}
+                    id="outlined-required"
+                    label="Chore"
                     value={this.state.inputValue}
                     onChange={(e) => this.updateInput(e.target.value)}
+                    defaultValue="Type chore here"
+                    variant="outlined"
                   />
-                  <DropdownButton
-                    as={InputGroup.Append}
-                    variant="outline-secondary"
-                    title={currentAssignee ? currentAssignee.name : 'Assignee'}
-                    id="input-group-dropdown"
-                    value={this.state.assigneeId}
+                  <DropdownSelect
+                    assignees={this.props.assignees}
+                    selected={this.state.assigneeId}
                     onSelect={(key) => this.updateAssignee(key)}
-                  >
-                    {this.props.assignees.map((assignee) => {
-                      return (
-                        <Dropdown.Item key={assignee.id} eventKey={assignee.id}>
-                          {assignee.name}
-                        </Dropdown.Item>
-                      )
-                    })}
-                  </DropdownButton>
+                  />
                 </InputGroup>
               </Col>
               <Col sm="auto">
@@ -98,7 +87,7 @@ export class AddChore extends React.Component {
               </Col>
               <Button
                 disabled={
-                  !this.state.assigneeId ||
+                  // !this.state.assigneeId ||
                   !this.state.inputValue ||
                   !this.state.inputPoints
                 }
