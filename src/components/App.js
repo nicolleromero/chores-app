@@ -131,7 +131,6 @@ export class App extends React.Component {
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
           <img class="inline-block h-8 w-8 rounded-full" src="https://github.com/nicolleromero.png?size=40" alt="" />
           <div class="mr-md-auto navbar-subtitle">&nbsp;&nbsp;NR Productions</div>
-
           <nav class="my-2 my-md-0 mr-md-3"></nav>
           <button
             class="flex"
@@ -146,20 +145,16 @@ export class App extends React.Component {
               boardName={this.state.boardName}
             />
           </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <div class="card mb-4 shadow-sm">
-                <AddChore
-                  assignees={this.state.assignees}
-                  onAddItem={this.handleAddItem}
-                />
-              </div>
-            </div>
+          <div>
+            <AddChore
+              assignees={this.state.assignees}
+              onAddItem={this.handleAddItem}
+            />
           </div>
+        </div>
 
 
+        <div class="container">
           <div class="row">
             {this.state.assignees.map((assignee) => {
               return (
@@ -189,14 +184,16 @@ export class App extends React.Component {
           <nav class="my-2 my-md-0 mr-md-3"></nav>
         </div>
 
-        {this.state.showConfetti && (
-          <Confetti
-            recycle={false}
-            style={{ position: 'fixed' }}
-            numberOfPieces={1500}
-            onConfettiComplete={this.handleConfettiComplete}
-          />
-        )}
+        {
+          this.state.showConfetti && (
+            <Confetti
+              recycle={false}
+              style={{ position: 'fixed' }}
+              numberOfPieces={1500}
+              onConfettiComplete={this.handleConfettiComplete}
+            />
+          )
+        }
 
         <SetupModal
           show={this.state.showSetupModal}
@@ -209,7 +206,7 @@ export class App extends React.Component {
           onChangeBoardName={this.handleSetBoardName}
         />
 
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }

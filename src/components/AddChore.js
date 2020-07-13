@@ -50,54 +50,62 @@ export class AddChore extends React.Component {
   render() {
     return (
       <div>
-        <div class="card-header">
+        <div className="align-items-center">
           <h4 class="chore-maintitle text-center">🌟 Add a Chore</h4>
         </div>
-        <div class="card-body">
+        <div class="row">
+          <div class="card-body">
 
-          <Form onSubmit={(e) => e.preventDefault()}>
-            <Form.Row className="align-items-center">
-              <Col lg={true}>
-                <InputGroup className="align-items-center">
-                  <TextField
-                    style={{ width: 500 }}
-                    id="outlined-required"
-                    label="Chore"
-                    value={this.state.inputValue}
-                    onChange={(e) => this.updateInput(e.target.value)}
-                    defaultValue="Type chore here"
-                    variant="outlined"
-                  />
-                  <DropdownSelect
-                    assignees={this.props.assignees}
-                    selected={this.state.assigneeId}
-                    onSelect={(key) => this.updateAssignee(key)}
-                  />
-                </InputGroup>
-              </Col>
-              <Col sm="auto">
-                <InputGroup>
-                  <FormControl
-                    type="text"
-                    placeholder="Points"
-                    value={this.state.inputPoints}
-                    onChange={(e) => this.updatePoints(e.target.value)}
-                  />
-                </InputGroup>
-              </Col>
-              <Button
-                disabled={
-                  // !this.state.assigneeId ||
-                  !this.state.inputValue ||
-                  !this.state.inputPoints
-                }
-                type="submit" class="btn btn-primary"
-                onClick={() => this.addItem()}
-              >
-                +
+            <Form onSubmit={(e) => e.preventDefault()}>
+              <Form.Row className="align-items-center">
+                <Col lg={true}>
+                  <InputGroup className="align-items-center">
+                    <TextField
+                      style={{ width: 500 }}
+                      id="outlined-required"
+                      label="Chore"
+                      value={this.state.inputValue}
+                      onChange={(e) => this.updateInput(e.target.value)}
+                      defaultValue="Type chore here"
+                      variant="outlined"
+                    />
+                    <DropdownSelect
+                      assignees={this.props.assignees}
+                      selected={this.state.assigneeId}
+                      onSelect={(key) => this.updateAssignee(key)}
+                    />
+                    <TextField
+                      style={{ width: 200 }}
+                      id="outlined-required"
+                      label="Points"
+                      type="text"
+                      placeholder="Points"
+                      defaultValue="Points"
+                      value={this.state.inputPoints}
+                      onChange={(e) => this.updatePoints(e.target.value)}
+                      variant="outlined"
+                    />
+                  </InputGroup>
+                </Col>
+                <Col sm="auto">
+                  <InputGroup className="align-items-center">
+
+                  </InputGroup>
+                </Col>
+                <Button
+                  disabled={
+                    // !this.state.assigneeId ||
+                    !this.state.inputValue ||
+                    !this.state.inputPoints
+                  }
+                  type="submit" class="btn btn-primary"
+                  onClick={() => this.addItem()}
+                >
+                  +
               </Button>
-            </Form.Row>
-          </Form>
+              </Form.Row>
+            </Form>
+          </div>
         </div>
       </div >
     );
