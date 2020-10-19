@@ -2,9 +2,9 @@ import React from 'react';
 
 import { ProgressBar } from 'react-bootstrap';
 
-export class GoalProgressBar extends React.Component {
+export function GoalProgressBar(props) {
 
-  handleGoalTotal(percent) {
+  function handleGoalTotal(percent) {
     let now = Math.round(percent * 100);
     if (!now) {
       return 0;
@@ -15,10 +15,8 @@ export class GoalProgressBar extends React.Component {
     }
   }
 
-  render() {
-    const now = this.handleGoalTotal(this.props.percentage);
-    return (
-      <ProgressBar animated now={now} label={`${now}%`} />
-    );
-  }
+  const now = handleGoalTotal(props.percentage);
+  return (
+    <ProgressBar animated now={now} label={`${now}%`} />
+  );
 }
