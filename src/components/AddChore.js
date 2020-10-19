@@ -1,113 +1,104 @@
-import React from 'react';
-import { Button, Col, Dropdown, DropdownButton, Form, FormControl, InputGroup } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Col, Form, InputGroup } from 'react-bootstrap';
 import TextField from '@material-ui/core/TextField';
 
 import './AddChore.css';
 import { DropdownSelect } from './DropdownSelect';
 
-export class AddChore extends React.Component {
-  state = {
-    inputValue: '',
-    inputPoints: '',
-    assigneeId: null,
-  }
+export function AddChore(props) {
+  const [inputValue, setInputValue] = useState('');
+  const [inputPoints, setInputPoints] = useState('');
+  const [assigneeId, setAssigneeId] = useState(undefined);
 
-  addItem() {
+  function addItem() {
     const newItem = {
       id: Date.now(),
-      value: this.state.inputValue.trim(),
-      assignee: this.state.assigneeId,
+      value: inputValue.trim(),
+      assignee: assigneeId,
       complete: false,
-      points: Number(this.state.inputPoints),
+      points: Number(inputPoints),
     }
 
-    this.props.onAddItem(newItem);
+    props.onAddItem(newItem);
 
-    this.setState({
-      inputValue: '',
-      inputPoints: '',
-    });
+    setInputValue('');
+    setInputPoints('');
   }
 
-  updateInput(value) {
-    this.setState({
-      inputValue: value.trimStart(),
-    });
+  function updateInput(value) {
+    setInputValue(value.trimStart());
   }
 
-  updatePoints(value) {
-    this.setState({
-      inputPoints: value.replace(/^0+|\D/g, ''),
-    });
+  function updatePoints(value) {
+    setInputPoints(value.replace(/^0+|\D/g, ''));
   }
 
-  updateAssignee(value) {
-    this.setState({
-      assigneeId: value,
-    });
+  function updateAssignee(value) {
+    setAssigneeId(value);
   }
 
-  render() {
-    return (
+  console.log('assignedId', assigneeId);
+
+  return (
+    <div>
       <div>
-        <div className="align-items-center">
-          <h4 class="chore-maintitle text-center">🌟 Add a Chore</h4>
-        </div>
-        <div class="row">
-          <div class="card-body">
+        <h4 className="chore-maintitle text-center">Add a Chore</h4>
+      </div>
+      <div className="d-flex flex-wrap align-items-center offset-2">
+        <div className="card-body d-flex flex-wrap align-items-center">
 
-            <Form onSubmit={(e) => e.preventDefault()}>
-              <Form.Row className="align-items-center">
-                <Col lg={true}>
-                  <InputGroup className="align-items-center">
-                    <TextField
-                      style={{ width: 500 }}
-                      id="outlined-required"
-                      label="Chore"
-                      value={this.state.inputValue}
-                      onChange={(e) => this.updateInput(e.target.value)}
-                      defaultValue="Type chore here"
-                      variant="outlined"
-                    />
-                    <DropdownSelect
-                      assignees={this.props.assignees}
-                      selected={this.state.assigneeId}
-                      onSelect={(key) => this.updateAssignee(key)}
-                    />
-                    <TextField
-                      style={{ width: 200 }}
-                      id="outlined-required"
-                      label="Points"
-                      type="text"
-                      placeholder="Points"
-                      defaultValue="Points"
-                      value={this.state.inputPoints}
-                      onChange={(e) => this.updatePoints(e.target.value)}
-                      variant="outlined"
-                    />
-                  </InputGroup>
-                </Col>
-                <Col sm="auto">
-                  <InputGroup className="align-items-center">
+          <Form onSubmit={(e) => e.preventDefault()}>
+            <Form.Row className="d-flex flex-wrap align-items-center align-items-center">
+              <Col lg={true}>
+                <InputGroup className="align-items-center align-self-center">
+                  <TextField
+                    className="text-align-center"
+                    style={{ width: 500, marginRight: 10 }}
+                    id="outlined-required"
+                    label="Chore"
+                    value={inputValue}
+                    onChange={(e) => updateInput(e.target.value)}
+                    placeholder="Type chore here"
+                    variant="outlined"
+                  />
+                  <DropdownSelect
+                    style={{ marginRight: 10 }}
+                    assignees={props.assignees}
+                    selected={assigneeId}
+                    onSelect={(key) => updateAssignee(key)}
+                  />
+                  <TextField
+                    style={{ width: 200, marginLeft: 10 }}
+                    id="outlined-required"
+                    label="Points"
+                    type="text"
+                    placeholder="Points"
+                    value={inputPoints}
+                    onChange={(e) => updatePoints(e.target.value)}
+                    variant="outlined"
+                  />
+                </InputGroup>
+              </Col>
+              <Col sm="auto">
+                <InputGroup className="align-items-center">
 
-                  </InputGroup>
-                </Col>
-                <Button
-                  disabled={
-                    // !this.state.assigneeId ||
-                    !this.state.inputValue ||
-                    !this.state.inputPoints
-                  }
-                  type="submit" class="btn btn-primary"
-                  onClick={() => this.addItem()}
-                >
-                  +
+                </InputGroup>
+              </Col>
+              <Button
+                disabled={
+                  // !this.state.assigneeId ||
+                  !inputValue ||
+                  !inputPoints
+                }
+                type="submit" className="btn btn-primary"
+                onClick={() => addItem()}
+              >
+                +
               </Button>
-              </Form.Row>
-            </Form>
-          </div>
+            </Form.Row>
+          </Form>
         </div>
-      </div >
-    );
-  }
+      </div>
+    </div >
+  );
 }

@@ -5,12 +5,11 @@ import { ListGroup } from 'react-bootstrap';
 
 import { Chore } from './Chore'
 
-
 import './ChoreList.css';
 
-export class ChoreList extends React.Component {
+export function ChoreList(props) {
 
-  formatChoreListTitles(list, completed) {
+  function formatChoreListTitles(list, completed) {
     let title = "";
 
     if (list.length !== 1) {
@@ -29,61 +28,60 @@ export class ChoreList extends React.Component {
     return title;
   }
 
-  render() {
-    let doneList = [];
-    let undoneList = [];
+  let doneList = [];
+  let undoneList = [];
 
-    for (let item of this.props.choreList) {
-      if (item['complete']) {
-        doneList.push(item);
-      } else {
-        undoneList.push(item);
-      }
-    }
+  doneList = props.choreList.filter((item) => item['complete']);
+  undoneList = props.choreList.filter((item) => !item['complete']);
 
-    return (
-      <div class="card shadow-sm">
-        <div class="card-header">
-          <h4 class="chore-maintitle text-center">
-            🧹 {this.props.assignee.name}'s Chores
+  console.log("doneList", doneList)
+  console.log("undoneList", undoneList)
+  console.log("choreList", props.choreList)
+
+  return (
+    <div className="card shadow-sm">
+      <div className="card-header">
+        <h4 className="chore-maintitle text-center">
+          <span role="img" aria-label="broom">🧹</span> {props.assignee.name}'s Chores
           </h4>
-        </div>
-        <div class="card-body text-center">
-          <ListGroup variant="flush">
-
-            <div className="align-text-center chore-title">
-              {this.formatChoreListTitles(undoneList, false)}</div>
-            <FlipMove duration={350} easing="ease-out">
-              {undoneList.map(item => {
-                return (
-                  <Chore
-                    item={item}
-                    onDelete={this.props.onDelete}
-                    onChange={this.props.onChange}
-                  />
-                );
-              })}
-            </FlipMove>
-          </ListGroup>
-        </div>
-        <div class="card-body text-center">
-          <ListGroup variant="flush">
-            <div className="align-text-center chore-title">
-              {this.formatChoreListTitles(doneList, true)}</div>
-            <FlipMove duration={350} easing="ease-out">
-              {doneList.map(item => {
-                return (
-                  <Chore
-                    item={item}
-                    onDelete={this.props.onDelete}
-                    onChange={this.props.onChange}
-                  />
-                );
-              })}
-            </FlipMove>
-          </ListGroup>
-        </div>
       </div>
-    );
-  }
+      <div className="card-body text-center">
+        <ListGroup variant="flush">
+
+          <div className="align-text-center chore-title">
+            {formatChoreListTitles(undoneList, false)}</div>
+          <FlipMove duration={350} easing="ease-out">
+            {undoneList.map(item => {
+              return (
+                <Chore
+                  item={item}
+                  key={item.id}
+                  onDelete={props.onDelete}
+                  onChange={props.onChange}
+                />
+              );
+            })}
+          </FlipMove>
+        </ListGroup>
+      </div>
+      <div className="card-body text-center">
+        <ListGroup variant="flush">
+          <div className="align-text-center chore-title">
+            {formatChoreListTitles(doneList, true)}</div>
+          <FlipMove duration={350} easing="ease-out">
+            {doneList.map(item => {
+              return (
+                <Chore
+                  item={item}
+                  key={item.id}
+                  onDelete={props.onDelete}
+                  onChange={props.onChange}
+                />
+              );
+            })}
+          </FlipMove>
+        </ListGroup>
+      </div>
+    </div>
+  );
 }
