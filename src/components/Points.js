@@ -1,35 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export class Points extends React.Component {
+export function Points(props) {
+  const [inputValue, setInputValue] = useState(null);
 
-  state = {
-    inputValue: null,
-  }
-
-  handleBlur = (event) => {
+  function handleBlur(event) {
     if (Number(event.target.value)) {
-      this.props.onChange(event);
+      props.onChange(event);
     }
 
-    this.setState({ inputValue: null });
+    setInputValue(null);
   }
 
-  handleChange = (event) => {
-    this.setState({
-      inputValue: event.target.value.replace(/^0+|\D/g, ''),
-    });
+  function handleChange(event) {
+    const newValue = event.target.value.replace(/^0+|\D/g, '');
+    setInputValue(newValue);
   }
 
-  render() {
-    return (
-      <input
-        class="text-right appearance-none bg-transparent border-none w-full text-gray-700 mr-3 leading-tight focus:outline-none points-input"
-        type="text"
-        placeholder="Points"
-        value={this.state.inputValue == null ? (this.props.value || '') : this.state.inputValue}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <input
+      className="text-right appearance-none bg-transparent border-none w-full text-gray-700 mr-3 leading-tight focus:outline-none points-input"
+      type="text"
+      placeholder="Points"
+      value={inputValue == null ? (props.value || '') : inputValue}
+      onBlur={handleBlur}
+      onChange={handleChange}
+    />
+  );
 }
