@@ -14,15 +14,14 @@ function getCurrentWeek() {
 }
 
 
-export class Title extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-          <h1 className="app-title">🗒 {this.props.boardName || 'Family'} Chores List</h1>
-          <p className="app-subtitle">Week of {getCurrentWeek()}</p>
-        </div>
-      </React.Fragment>
-    );
-  }
+export function Title(props) {
+
+  return (
+    <React.Fragment>
+      <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 className="app-title">🗒 {props.boardName || 'Family'} Chores List</h1>
+        <p className="app-subtitle">Week of {getCurrentWeek()}</p>
+      </div>
+    </React.Fragment>
+  );
 }
