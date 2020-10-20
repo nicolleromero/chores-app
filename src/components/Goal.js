@@ -5,46 +5,42 @@ import { Points } from './Points';
 
 import './Goal.css';
 
-export class Goal extends React.Component {
-  state = {
-    editing: false,
+export function Goal(props) {
+  const [editing, setEditing] = React.useState(false);
+
+  function handleFocus() {
+    setEditing(!editing);
   }
 
-  handleFocus = () => {
-    this.setState({ editing: true });
+  function handleBlur() {
+    setEditing(!editing);
   }
 
-  handleBlur = () => {
-    this.setState({ editing: false });
-  }
-
-  render() {
-    return (
-      <form
-        class="list-item"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <div class="flex md:items-center border-b border-b-2 border-blue-500 py-2">
-          <input
-            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            type="text"
-            placeholder="Type goal here"
-            value={this.props.goal.value}
-            onChange={(e) => this.props.onChange(this.props.goal.id, 'value', e.target.value)}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
+  return (
+    <form
+      className="list-item"
+      onSubmit={(e) => e.preventDefault()}
+    >
+      <div className="flex md:items-center border-b border-b-2 border-blue-500 py-2">
+        <input
+          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          type="text"
+          placeholder="Type goal here"
+          value={props.goal.value}
+          onChange={(e) => props.onChange(props.goal.id, 'value', e.target.value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+        {editing && (
+          <DeleteButton
+            onClick={() => props.onDelete(props.goal.id)}
           />
-          {this.state.editing && (
-            <DeleteButton
-              onClick={() => this.props.onDelete(this.props.goal.id)}
-            />
-          )}
-          <Points
-            value={this.props.goal.points}
-            onChange={(e) => this.props.onChange(this.props.goal.id, 'points', Number(e.target.value))}
-          />
-        </div>
-      </form>
-    );
-  }
+        )}
+        <Points
+          value={props.goal.points}
+          onChange={(e) => props.onChange(props.goal.id, 'points', Number(e.target.value))}
+        />
+      </div>
+    </form >
+  );
 }

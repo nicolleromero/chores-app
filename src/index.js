@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './tailwind.generated.css';
 
 import { App } from './components/App';
+import { reducer } from './components/App';
 
 // import * as registerServiceWorker from './registerServiceWorker';
 
@@ -21,7 +24,16 @@ import { App } from './components/App';
 //   </div>
 // );
 
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+
+const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootElement
 );
