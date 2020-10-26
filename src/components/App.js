@@ -6,6 +6,8 @@ import { Title } from './Title';
 import { SetupModal } from './SetupModal';
 import { KidCard } from './KidCard';
 import { AddChore } from './AddChore';
+import { INITIAL_STATE } from './constants';
+import { handleSetBoardName, setBoardName } from "../redux/actions";
 
 const STORAGE_KEY = 'ChoresApp';
 
@@ -18,13 +20,8 @@ function setLocalStorage(state) {
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-const initialState = {
-  boardName: '',
-  assignees: [],
-  choreList: [],
-  goalList: [],
-  showConfetti: false,
-  showSetupModal: false,
+export const initialState = {
+  INITIAL_STATE,
   ...getLocalStorage()
 }
 
@@ -176,11 +173,8 @@ export const App = () => {
     setLocalStorage(reducer());
   }
 
-  const handleSetBoardName = (chosenName) => {
-    dispatch({
-      type: ADD_BOARDNAME,
-      payload: boardName,
-    });
+  const handleSetBoardName = (boardName) => {
+    dispatch(setBoardName(boardName));
   }
 
   const handleAddItem = (newChore) => {

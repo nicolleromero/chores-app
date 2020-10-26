@@ -1,0 +1,11 @@
+export const ADD_BOARDNAME = 'ADD_BOARDNAME';
+export const ADD_ASSIGNEE = 'ADD_ASSIGNEE';
+export const DELETE_ASSIGNEE = 'DELETE_ASSIGNEE';
+export const CHANGE_ASSIGNEE = 'CHANGE_ASSIGNEE';
+export const ADD_CHORE = 'ADD_CHORE';
+export const DELETE_CHORE = 'DELETE_CHORE';
+export const CHANGE_CHORE = 'CHANGE_CHORE';
+export const ADD_GOAL = 'ADD_GOAL';
+export const DELETE_GOAL = 'DELETE_GOAL';
+export const CHANGE_GOAL = 'CHANGE_GOAL';
+export const SHOW_SETUPMODAL = 'SHOW_SETUPMODAL';
