@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from "react-redux";
 import {
   ADD_BOARDNAME,
   ADD_ASSIGNEE,
@@ -22,33 +21,33 @@ export const setBoardName = (boardName) => {
   };
 }
 
-// export const handleAddItem = (newChore) => {
-//   dispatch({
-//     type: ADD_CHORE,
-//     payload: newChore,
-//   });
-// }
+export const addChore = (newChore) => {
+  return {
+    type: ADD_CHORE,
+    payload: newChore,
+  };
+}
 
-// export const handleAddAssignee = (newAssignee) => {
-//   dispatch({
-//     type: ADD_ASSIGNEE,
-//     payload: newAssignee,
-//   });
-// };
+export const addAssignee = (newAssignee) => {
+  return {
+    type: ADD_ASSIGNEE,
+    payload: newAssignee,
+  };
+};
 
-// export const handleChangeAssignee = (assigneeId, key, value) => {
-//   dispatch({
-//     type: CHANGE_ASSIGNEE,
-//     payload: { assigneeId, key, value },
-//   });
-// }
+export const changeAssignee = (assigneeId, key, value) => {
+  return {
+    type: CHANGE_ASSIGNEE,
+    payload: { assigneeId, key, value },
+  };
+}
 
-// export const handleDeleteAssignee = (assigneeId) => {
-//   dispatch({
-//     type: DELETE_ASSIGNEE,
-//     payload: assigneeId,
-//   });
-// };
+export const deleteAssignee = (assigneeId) => {
+  return {
+    type: DELETE_ASSIGNEE,
+    payload: assigneeId,
+  };
+};
 
 // export const handleAddGoal = (newGoal) => {
 //   dispatch({
@@ -99,16 +98,16 @@ export const setBoardName = (boardName) => {
 // //   });
 // // }
 
-// export const handleSetup = () => {
-//   dispatch({
-//     type: SHOW_SETUPMODAL,
-//     payload: true,
-//   });
-// }
+export const showSetupModal = () => {
+  return {
+    type: SHOW_SETUPMODAL,
+    payload: true,
+  };
+}
 
-// export const handleCloseSetup = () => {
-//   dispatch({
-//     type: SHOW_SETUPMODAL,
-//     payload: false,
-//   });
-// }
+export const closeSetup = () => {
+  return {
+    type: SHOW_SETUPMODAL,
+    payload: false,
+  };
+}

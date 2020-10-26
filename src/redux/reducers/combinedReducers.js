@@ -19,7 +19,7 @@ export const INITIAL_STATE = {
   choreList: [],
   goalList: [],
   showConfetti: false,
-  showSetupModal: false,
+  showSetup: false,
 }
 
 // import visibilityFilter from "./visibilityFilter";
@@ -58,7 +58,7 @@ export function reducer(state = initialState, action) {
 
     return {
       ...state,
-      showSetupModal: newState,
+      showSetup: newState,
     };
 
   } else if (action.type === ADD_ASSIGNEE) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 
 import './Title.css';
 
@@ -15,11 +16,12 @@ function getCurrentWeek() {
 
 
 export function Title(props) {
+  const boardName = useSelector(state => state.boardName);
 
   return (
     <React.Fragment>
       <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 className="app-title">🗒 {props.boardName || 'Family'} Chores List</h1>
+        <h1 className="app-title">🗒 {boardName || 'Family'} Chores List</h1>
         <p className="app-subtitle">Week of {getCurrentWeek()}</p>
       </div>
     </React.Fragment>

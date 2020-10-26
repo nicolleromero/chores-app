@@ -4,5 +4,5 @@ export const INITIAL_STATE = {
   choreList: [],
   goalList: [],
   showConfetti: false,
-  showSetupModal: false,
+  showSetup: false,
 }

@@ -7,7 +7,7 @@ import { SetupModal } from './SetupModal';
 import { KidCard } from './KidCard';
 import { AddChore } from './AddChore';
 import { INITIAL_STATE } from './constants';
-import { handleSetBoardName, setBoardName } from "../redux/actions";
+import { addChore, showSetupModal } from "../redux/actions";
 
 const STORAGE_KEY = 'ChoresApp';
 
@@ -51,10 +51,11 @@ export function reducer(state = initialState, action) {
 
   } else if (action.type === SHOW_SETUPMODAL) {
     const newState = action.payload;
+    console.log("action.payload", action.payload)
 
     return {
       ...state,
-      showSetupModal: newState,
+      showSetup: newState,
     };
 
   } else if (action.type === ADD_ASSIGNEE) {
@@ -156,12 +157,11 @@ export function reducer(state = initialState, action) {
 
 export const App = () => {
   const dispatch = useDispatch();
-  const boardName = useSelector(state => state.boardName);
+  const showSetup = useSelector(state => state.showSetup);
   const assignees = useSelector(state => state.assignees);
   const choreList = useSelector(state => state.choreList);
   const goalList = useSelector(state => state.goalList);
   const showConfetti = useSelector(state => state.showConfetti);
-  const showSetupModal = useSelector(state => state.showSetupModal);
 
   useEffect(() => {
     if (!assignees.length) {
@@ -173,37 +173,9 @@ export const App = () => {
     setLocalStorage(reducer());
   }
 
-  const handleSetBoardName = (boardName) => {
-    dispatch(setBoardName(boardName));
+  const handleAddChore = (newChore) => {
+    dispatch(addChore(newChore));
   }
-
-  const handleAddItem = (newChore) => {
-    dispatch({
-      type: ADD_CHORE,
-      payload: newChore,
-    });
-  }
-
-  const handleAddAssignee = (newAssignee) => {
-    dispatch({
-      type: ADD_ASSIGNEE,
-      payload: newAssignee,
-    });
-  };
-
-  const handleChangeAssignee = (assigneeId, key, value) => {
-    dispatch({
-      type: CHANGE_ASSIGNEE,
-      payload: { assigneeId, key, value },
-    });
-  }
-
-  const handleDeleteAssignee = (assigneeId) => {
-    dispatch({
-      type: DELETE_ASSIGNEE,
-      payload: assigneeId,
-    });
-  };
 
   const handleAddGoal = (newGoal) => {
     dispatch({
@@ -255,17 +227,10 @@ export const App = () => {
   }
 
   const handleSetup = () => {
-    dispatch({
-      type: SHOW_SETUPMODAL,
-      payload: true,
-    });
-  }
-
-  const handleCloseSetup = () => {
-    dispatch({
-      type: SHOW_SETUPMODAL,
-      payload: false,
-    });
+    dispatch(showSetupModal());
+    console.log("************ showSetup", showSetup);
+    console.log("showSetupModal", showSetupModal.type)
+    console.log("showSetupModal", showSetupModal.payload)
   }
 
   return (
@@ -283,14 +248,12 @@ export const App = () => {
       </div>
       <div className="container">
         <div className="row">
-          <Title
-            boardName={boardName}
-          />
+          <Title />
         </div>
         <div>
           <AddChore
             assignees={assignees}
-            onAddItem={handleAddItem}
+            onAddItem={handleAddChore}
           />
         </div>
       </div>
@@ -338,14 +301,7 @@ export const App = () => {
         )
       }
       <SetupModal
-        show={showSetupModal}
-        assignees={assignees}
-        onHide={handleCloseSetup}
-        onDelete={handleDeleteAssignee}
-        onChange={handleChangeAssignee}
-        onAddAssignee={handleAddAssignee}
-        boardName={boardName}
-        onChangeBoardName={handleSetBoardName}
+        showSetup={showSetup}
       />
     </React.Fragment >
   )

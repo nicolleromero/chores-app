@@ -1,33 +1,43 @@
 import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import FlipMove from 'react-flip-move';
 import { Button, Form, InputGroup, ListGroup, Modal } from 'react-bootstrap';
 
 import { DeleteButton } from './DeleteButton';
+import { setBoardName, addAssignee, changeAssignee, deleteAssignee, closeSetup } from "../redux/actions";
 
 import './SetupModal.css';
 
 
 export function SetupModal(props) {
+  const dispatch = useDispatch();
+  const boardName = useSelector(state => state.boardName);
+  const assignees = useSelector(state => state.assignees);
   const [inputValue, setInputValue] = React.useState('');
   const [editing, setEditing] = React.useState(false);
 
-  function addAssignee() {
+
+  function handleAddAssignee() {
     const newAssignee = {
       id: Math.random().toString(36).slice(2),
       name: inputValue.trim(),
     }
 
-    props.onAddAssignee(newAssignee);
+    dispatch(addAssignee(newAssignee));
 
     setInputValue('');
+  }
+
+  function handleDeleteAssignee(assigneeId) {
+    dispatch(deleteAssignee(assigneeId));
   }
 
   function updateInput(value) {
     setInputValue(value.trimStart());
   }
 
-  function updateBoardName(value) {
-    props.onChangeBoardName(value.trimStart());
+  const handleSetBoardName = (boardName) => {
+    dispatch(setBoardName(boardName.trimStart()));
   }
 
   function handleFocus() {
@@ -38,14 +48,17 @@ export function SetupModal(props) {
     setEditing(!editing);
 
     if (!assignee.name) {
-      props.onDelete(assignee.id);
+      dispatch(deleteAssignee(assignee.id));
     }
+  }
+
+  const handleCloseSetup = () => {
+    dispatch(closeSetup());
   }
 
   return (
     <Modal
-      show={props.show}
-      onHide={props.onHide}
+      show={props.showSetup}
     >
       <Modal.Header className="align-items-center align-self-center">
         <h4 className="chore-maintitle text-center align-items-center text-center">Update Board Name</h4>
@@ -58,8 +71,8 @@ export function SetupModal(props) {
                 <Form.Control
                   className="appearance-none bg-transparent border-none w-full text-center text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                   type="text"
-                  value={props.boardName}
-                  onChange={(e) => updateBoardName(e.target.value)}
+                  value={boardName}
+                  onChange={(e) => handleSetBoardName(e.target.value)}
                   placeholder="Enter name for board"
                 />
               </InputGroup>
@@ -87,7 +100,7 @@ export function SetupModal(props) {
                   disabled={!inputValue}
                   type="submit"
                   className="btn btn-primary"
-                  onClick={() => addAssignee()}
+                  onClick={() => handleAddAssignee()}
                 >
                   +
                   </Button>
@@ -101,7 +114,7 @@ export function SetupModal(props) {
                 Current Assignees
               </div>
               <FlipMove duration={350} easing="ease-out">
-                {props.assignees.map((assignee) => {
+                {assignees.map((assignee) => {
                   return (
                     <form
                       key={assignee.id}
@@ -119,7 +132,7 @@ export function SetupModal(props) {
                         />
                         {editing && (
                           <DeleteButton
-                            onClick={() => props.onDelete(assignee.id)}
+                            onClick={() => handleDeleteAssignee(assignee.id)}
                           />
                         )}
                       </div>
@@ -136,8 +149,8 @@ export function SetupModal(props) {
           type="submit"
           className="btn btn-secondary"
           variant="secondary"
-          disabled={!props.assignees.length}
-          onClick={props.onHide}
+          disabled={!assignees.length}
+          onClick={handleCloseSetup}
         >
           Close
           </Button>
