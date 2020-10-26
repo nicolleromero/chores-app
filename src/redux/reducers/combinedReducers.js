@@ -27,23 +27,7 @@ export const INITIAL_STATE = {
 
 // export default combineReducers({ todos, visibilityFilter });
 
-const STORAGE_KEY = 'ChoresApp';
-
-function getLocalStorage() {
-  const value = window.localStorage.getItem(STORAGE_KEY);
-  return value ? JSON.parse(value) : {};
-}
-
-function setLocalStorage(state) {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-export const initialState = {
-  INITIAL_STATE,
-  ...getLocalStorage()
-}
-
-export function reducer(state = initialState, action) {
+export function reducer(state = INITIAL_STATE, action) {
 
   if (action.type === ADD_BOARDNAME) {
     const newBoardName = action.payload;
