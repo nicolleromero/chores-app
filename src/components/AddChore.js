@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, InputGroup } from 'react-bootstrap';
 import TextField from '@material-ui/core/TextField';
 
 import './AddChore.css';
 import { DropdownSelect } from './DropdownSelect';
+import { addChore } from "../redux/actions";
 
-export function AddChore(props) {
+export function AddChore() {
+  const dispatch = useDispatch();
+  const assignees = useSelector(state => state.assignees);
   const [inputValue, setInputValue] = useState('');
   const [inputPoints, setInputPoints] = useState('');
   const [assigneeId, setAssigneeId] = useState(undefined);
 
-  function addItem() {
-    const newItem = {
+  function handleAddChore() {
+
+    const newChore = {
       id: Date.now(),
       value: inputValue.trim(),
       assignee: assigneeId,
@@ -19,10 +24,11 @@ export function AddChore(props) {
       points: Number(inputPoints),
     }
 
-    props.onAddItem(newItem);
+    dispatch(addChore(newChore));
 
     setInputValue('');
     setInputPoints('');
+
   }
 
   function updateInput(value) {
@@ -63,7 +69,7 @@ export function AddChore(props) {
                   />
                   <DropdownSelect
                     style={{ marginRight: 10 }}
-                    assignees={props.assignees}
+                    assignees={assignees}
                     selected={assigneeId}
                     onSelect={(key) => updateAssignee(key)}
                   />
@@ -91,7 +97,7 @@ export function AddChore(props) {
                   !inputPoints
                 }
                 type="submit" className="btn btn-primary"
-                onClick={() => addItem()}
+                onClick={() => handleAddChore()}
               >
                 +
               </Button>

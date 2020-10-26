@@ -28,6 +28,20 @@ export const addChore = (newChore) => {
   };
 }
 
+export const deleteChore = (itemId) => {
+  return {
+    type: DELETE_CHORE,
+    payload: itemId,
+  };
+};
+
+export const changeChore = (itemId, key, value) => {
+  return {
+    type: CHANGE_CHORE,
+    payload: { itemId, key, value },
+  };
+}
+
 export const addAssignee = (newAssignee) => {
   return {
     type: ADD_ASSIGNEE,
@@ -49,12 +63,12 @@ export const deleteAssignee = (assigneeId) => {
   };
 };
 
-// export const handleAddGoal = (newGoal) => {
-//   dispatch({
-//     type: ADD_GOAL,
-//     payload: newGoal,
-//   });
-// }
+export const addGoal = (newGoal) => {
+  return {
+    type: ADD_GOAL,
+    payload: newGoal,
+  };
+}
 
 // export const handleDeleteGoal = (goalId) => {
 //   dispatch({
@@ -67,20 +81,6 @@ export const deleteAssignee = (assigneeId) => {
 //   dispatch({
 //     type: CHANGE_GOAL,
 //     payload: { goalId, key, value },
-//   });
-// }
-
-// export const handleDeleteChore = (itemId) => {
-//   dispatch({
-//     type: DELETE_CHORE,
-//     payload: itemId,
-//   });
-// };
-
-// export const handleChange = (itemId, key, value) => {
-//   dispatch({
-//     type: CHANGE_CHORE,
-//     payload: { itemId, key, value },
 //   });
 // }
 

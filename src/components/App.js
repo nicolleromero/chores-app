@@ -7,7 +7,7 @@ import { SetupModal } from './SetupModal';
 import { KidCard } from './KidCard';
 import { AddChore } from './AddChore';
 import { INITIAL_STATE } from './constants';
-import { addChore, showSetupModal } from "../redux/actions";
+import { showSetupModal } from "../redux/actions";
 
 const STORAGE_KEY = 'ChoresApp';
 
@@ -51,7 +51,6 @@ export function reducer(state = initialState, action) {
 
   } else if (action.type === SHOW_SETUPMODAL) {
     const newState = action.payload;
-    console.log("action.payload", action.payload)
 
     return {
       ...state,
@@ -173,10 +172,6 @@ export const App = () => {
     setLocalStorage(reducer());
   }
 
-  const handleAddChore = (newChore) => {
-    dispatch(addChore(newChore));
-  }
-
   const handleAddGoal = (newGoal) => {
     dispatch({
       type: ADD_GOAL,
@@ -251,10 +246,7 @@ export const App = () => {
           <Title />
         </div>
         <div>
-          <AddChore
-            assignees={assignees}
-            onAddItem={handleAddChore}
-          />
+          <AddChore />
         </div>
       </div>
 
