@@ -34,8 +34,12 @@ export function ChoreList(props) {
   let doneList = [];
   let undoneList = [];
 
-  doneList = choreList.filter((item) => item['complete']);
-  undoneList = choreList.filter((item) => !item['complete']);
+  doneList = choreList
+    .filter((item) => item['complete'])
+    .filter((chore) => chore.assignee === props.assignee.id);
+  undoneList = choreList
+    .filter((item) => !item['complete'])
+    .filter((chore) => chore.assignee === props.assignee.id);
 
   return (
     <div className="card shadow-sm">

@@ -1,15 +1,36 @@
 import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { Col } from 'react-bootstrap';
+import { addGoal, deleteGoal, changeGoal, showConfettiFall } from "../redux/actions";
 
 import { ChoreList } from './ChoreList';
 import { GoalLists } from './GoalLists';
 
 export function KidCard(props) {
+  const dispatch = useDispatch();
+  const choreList = useSelector(state => state.choreList);
+  const goalList = useSelector(state => state.goalList);
+
+  const handleAddGoal = (newGoal) => {
+    dispatch(addGoal(newGoal));
+  }
+
+  const handleDeleteGoal = (goalId) => {
+    dispatch(deleteGoal(goalId));
+  };
+
+  const handleChangeGoal = (goalId, key, value) => {
+    dispatch(changeGoal(goalId, key, value));
+  }
 
   function calculatePointsTotal() {
-    return props.choreList
+    return choreList
       .filter((chore) => chore.complete)
       .reduce((sum, chore) => sum + Number(chore.points), 0);
+  }
+
+  const handleGoalCompleted = () => {
+    dispatch(showConfettiFall(true));
   }
 
   let completedGoalsList = [];
@@ -18,7 +39,7 @@ export function KidCard(props) {
   let remainingPoints = calculatePointsTotal();
   let incomplete = false;
 
-  for (let goal of props.goalList) {
+  for (let goal of goalList) {
     if (!incomplete && goal.points && remainingPoints >= goal.points) {
       completedGoalsList.unshift(goal);
       remainingPoints = remainingPoints - goal.points;
@@ -32,9 +53,6 @@ export function KidCard(props) {
     <Col xs={6}>
       <ChoreList
         assignee={props.assignee}
-        choreList={props.choreList}
-        onDelete={props.onDelete}
-        onChange={props.onChange}
       />
 
       <GoalLists
@@ -42,10 +60,10 @@ export function KidCard(props) {
         completedPoints={remainingPoints}
         completedGoalsList={completedGoalsList}
         incompleteGoalsList={incompleteGoalsList}
-        onAddGoal={props.onAddGoal}
-        onDeleteGoal={props.onDeleteGoal}
-        onChangeGoal={props.onChangeGoal}
-        onGoalCompleted={props.onGoalCompleted}
+        onAddGoal={handleAddGoal}
+        onDeleteGoal={handleDeleteGoal}
+        onChangeGoal={handleChangeGoal}
+        onGoalCompleted={handleGoalCompleted}
       />
     </Col>
   );

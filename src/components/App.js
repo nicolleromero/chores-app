@@ -6,136 +6,7 @@ import { Title } from './Title';
 import { SetupModal } from './SetupModal';
 import { KidCard } from './KidCard';
 import { AddChore } from './AddChore';
-import { showSetupModal } from "../redux/actions";
-
-const ADD_BOARDNAME = 'ADD_BOARDNAME';
-const ADD_ASSIGNEE = 'ADD_ASSIGNEE';
-const DELETE_ASSIGNEE = 'DELETE_ASSIGNEE';
-const CHANGE_ASSIGNEE = 'CHANGE_ASSIGNEE';
-const ADD_CHORE = 'ADD_CHORE';
-const DELETE_CHORE = 'DELETE_CHORE';
-const CHANGE_CHORE = 'CHANGE_CHORE';
-const ADD_GOAL = 'ADD_GOAL';
-const DELETE_GOAL = 'DELETE_GOAL';
-const CHANGE_GOAL = 'CHANGE_GOAL';
-const SHOW_CONFETTI = 'SHOW_CONFETTI';
-const SHOW_SETUPMODAL = 'SHOW_SETUPMODAL';
-
-
-// export function reducer(state = initialState, action) {
-
-//   if (action.type === ADD_BOARDNAME) {
-//     const newBoardName = action.payload;
-
-//     return {
-//       ...state,
-//       boardName: newBoardName,
-//     };
-
-//   } else if (action.type === SHOW_SETUPMODAL) {
-//     const newState = action.payload;
-
-//     return {
-//       ...state,
-//       showSetup: newState,
-//     };
-
-//   } else if (action.type === ADD_ASSIGNEE) {
-//     const newAssignee = action.payload;
-
-//     return {
-//       ...state,
-//       assignees: [...state.assignees, newAssignee],
-//     };
-
-//   } else if (action.type === DELETE_ASSIGNEE) {
-//     const assigneeId = action.payload;
-//     const newAssignees = state.assignees.filter((c) => c.id !== assigneeId);
-
-//     return {
-//       ...state,
-//       assignees: newAssignees,
-//     };
-
-//   } else if (action.type === CHANGE_ASSIGNEE) {
-//     const { assigneeId, key, value } = action.payload;
-//     const newAssignees = state.assignees.map((assignee) => {
-//       if (assignee.id === assigneeId) {
-//         return { ...assignee, [key]: value };
-//       }
-//       return assignee;
-//     });
-
-//     return {
-//       ...state,
-//       assignees: newAssignees,
-//     };
-
-//   } else if (action.type === ADD_CHORE) {
-//     const newChore = action.payload;
-
-//     return {
-//       ...state,
-//       choreList: [...state.choreList, newChore],
-//     };
-
-//   } else if (action.type === DELETE_CHORE) {
-//     const itemId = action.payload;
-//     const newChoreList = state.choreList.filter((c) => c.id !== itemId);
-
-//     return {
-//       ...state,
-//       choreList: newChoreList,
-//     };
-
-//   } else if (action.type === CHANGE_CHORE) {
-//     const { itemId, key, value } = action.payload;
-//     const newChoreList = state.choreList.map((listItem) => {
-//       if (listItem.id === itemId) {
-//         return { ...listItem, [key]: value };
-//       }
-//       return listItem;
-//     });
-
-//     return {
-//       ...state,
-//       choreList: newChoreList,
-//     };
-
-//   } else if (action.type === ADD_GOAL) {
-//     const newGoal = action.payload;
-
-//     return {
-//       ...state,
-//       goalList: [...state.goalList, newGoal],
-//     };
-
-//   } else if (action.type === DELETE_GOAL) {
-//     const goalId = action.payload;
-//     const newGoalList = state.goalList.filter((c) => c.id !== goalId);
-
-//     return {
-//       ...state,
-//       goalList: newGoalList,
-//     };
-
-//   } else if (action.type === CHANGE_GOAL) {
-//     const { goalId, key, value } = action.payload;
-//     const newGoalList = state.goalList.map((goal) => {
-//       if (goal.id === goalId) {
-//         return { ...goal, [key]: value };
-//       }
-//       return goal;
-//     });
-
-//     return {
-//       ...state,
-//       goalList: newGoalList,
-//     };
-//   }
-
-//   return state;
-// }
+import { showSetupModal, showConfettiFall } from "../redux/actions";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -151,57 +22,8 @@ export const App = () => {
     }
   }, []);
 
-  // const componentDidUpdate = () => {
-  //   setLocalStorage(reducer());
-  // }
-
-  const handleAddGoal = (newGoal) => {
-    dispatch({
-      type: ADD_GOAL,
-      payload: newGoal,
-    });
-  }
-
-  const handleDeleteGoal = (goalId) => {
-    dispatch({
-      type: DELETE_GOAL,
-      payload: goalId,
-    });
-  };
-
-  const handleChangeGoal = (goalId, key, value) => {
-    dispatch({
-      type: CHANGE_GOAL,
-      payload: { goalId, key, value },
-    });
-  }
-
-  const handleDeleteChore = (itemId) => {
-    dispatch({
-      type: DELETE_CHORE,
-      payload: itemId,
-    });
-  };
-
-  const handleChange = (itemId, key, value) => {
-    dispatch({
-      type: CHANGE_CHORE,
-      payload: { itemId, key, value },
-    });
-  }
-
-  const handleGoalCompleted = () => {
-    dispatch({
-      type: SHOW_CONFETTI,
-      payload: true,
-    });
-  }
-
   const handleConfettiComplete = () => {
-    dispatch({
-      type: SHOW_CONFETTI,
-      payload: false,
-    });
+    dispatch(showConfettiFall(false));
   }
 
   const handleSetup = () => {
@@ -244,12 +66,6 @@ export const App = () => {
                 goalList={goalList.filter((goal) => {
                   return goal.assignee === assignee.id;
                 })}
-                onDelete={handleDeleteChore}
-                onChange={handleChange}
-                onAddGoal={handleAddGoal}
-                onDeleteGoal={handleDeleteGoal}
-                onChangeGoal={handleChangeGoal}
-                onGoalCompleted={handleGoalCompleted}
               />
             )
           })}
