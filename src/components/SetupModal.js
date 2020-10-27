@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import FlipMove from 'react-flip-move';
 import { Button, Form, InputGroup, ListGroup, Modal } from 'react-bootstrap';
 
 import { DeleteButton } from './DeleteButton';
-import { setBoardName, addAssignee, changeAssignee, deleteAssignee, closeSetup } from "../redux/actions";
-
+import { setBoardName, addAssignee, deleteAssignee, closeSetup } from "../redux/actions";
 import './SetupModal.css';
-
 
 export function SetupModal(props) {
   const dispatch = useDispatch();
   const boardName = useSelector(state => state.boardName);
   const assignees = useSelector(state => state.assignees);
-  const [inputValue, setInputValue] = React.useState('');
-  const [editing, setEditing] = React.useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [editing, setEditing] = useState(false);
 
 
   function handleAddAssignee() {
@@ -24,7 +22,6 @@ export function SetupModal(props) {
     }
 
     dispatch(addAssignee(newAssignee));
-
     setInputValue('');
   }
 
@@ -36,7 +33,7 @@ export function SetupModal(props) {
     setInputValue(value.trimStart());
   }
 
-  const handleSetBoardName = (boardName) => {
+  function handleSetBoardName(boardName) {
     dispatch(setBoardName(boardName.trimStart()));
   }
 
@@ -52,7 +49,7 @@ export function SetupModal(props) {
     }
   }
 
-  const handleCloseSetup = () => {
+  function handleCloseSetup() {
     dispatch(closeSetup());
   }
 

@@ -9,10 +9,9 @@ import {
   ADD_GOAL,
   DELETE_GOAL,
   CHANGE_GOAL,
-  SHOW_SETUPMODAL
+  SHOW_SETUPMODAL,
+  SHOW_CONFETTI
 } from "./actionTypes";
-
-
 
 export const setBoardName = (boardName) => {
   return {
@@ -70,33 +69,40 @@ export const addGoal = (newGoal) => {
   };
 }
 
-// export const handleDeleteGoal = (goalId) => {
-//   dispatch({
-//     type: DELETE_GOAL,
-//     payload: goalId,
-//   });
-// };
+export const deleteGoal = (goalId) => {
+  return {
+    type: DELETE_GOAL,
+    payload: goalId,
+  };
+};
 
-// export const handleChangeGoal = (goalId, key, value) => {
-//   dispatch({
-//     type: CHANGE_GOAL,
-//     payload: { goalId, key, value },
-//   });
-// }
+export const changeGoal = (goalId, key, value) => {
+  return {
+    type: CHANGE_GOAL,
+    payload: { goalId, key, value },
+  };
+}
 
-// // export const handleGoalCompleted = () => {
-// //   dispatch({
-// //     type: SHOW_CONFETTI,
-// //     payload: true,
-// //   });
-// // }
+export const goalCompleted = () => {
+  return {
+    type: SHOW_CONFETTI,
+    payload: true,
+  };
+}
 
-// // export const handleConfettiComplete = () => {
-// //   dispatch({
-// //     type: SHOW_CONFETTI,
-// //     payload: false,
-// //   });
-// // }
+export const confettiComplete = () => {
+  return {
+    type: SHOW_CONFETTI,
+    payload: false,
+  };
+}
+
+export const showConfettiFall = () => {
+  return {
+    type: SHOW_CONFETTI,
+    payload: true,
+  };
+}
 
 export const showSetupModal = () => {
   return {

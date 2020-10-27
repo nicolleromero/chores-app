@@ -1,13 +1,16 @@
-// import React from 'react';
 import React from "react";
 import FlipMove from 'react-flip-move';
 import { ListGroup } from 'react-bootstrap';
+import { useSelector } from "react-redux";
 
 import { Chore } from './Chore'
 
 import './ChoreList.css';
 
 export function ChoreList(props) {
+  const assignees = useSelector(state => state.assignees);
+  const choreList = useSelector(state => state.choreList);
+
 
   function formatChoreListTitles(list, completed) {
     let title = "";
@@ -31,12 +34,8 @@ export function ChoreList(props) {
   let doneList = [];
   let undoneList = [];
 
-  doneList = props.choreList.filter((item) => item['complete']);
-  undoneList = props.choreList.filter((item) => !item['complete']);
-
-  console.log("doneList", doneList)
-  console.log("undoneList", undoneList)
-  console.log("choreList", props.choreList)
+  doneList = choreList.filter((item) => item['complete']);
+  undoneList = choreList.filter((item) => !item['complete']);
 
   return (
     <div className="card shadow-sm">
@@ -56,8 +55,6 @@ export function ChoreList(props) {
                 <Chore
                   item={item}
                   key={item.id}
-                  onDelete={props.onDelete}
-                  onChange={props.onChange}
                 />
               );
             })}
@@ -74,8 +71,6 @@ export function ChoreList(props) {
                 <Chore
                   item={item}
                   key={item.id}
-                  onDelete={props.onDelete}
-                  onChange={props.onChange}
                 />
               );
             })}

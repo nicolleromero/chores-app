@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -15,8 +16,10 @@ const styles = {
 };
 
 function InnerDropdownSelect(props) {
+  const dispatch = useDispatch();
+  const assignees = useSelector(state => state.assignees);
 
-  let currentAssignee = props.assignees.find((assignee) => {
+  let currentAssignee = assignees.find((assignee) => {
     return assignee.id === props.selected;
   })
 
@@ -31,7 +34,7 @@ function InnerDropdownSelect(props) {
       onChange={(e) => props.onSelect(e.target.value)}
       variant="outlined"
     >
-      {props.assignees.map((assignee) => {
+      {assignees.map((assignee) => {
         return (
           <MenuItem key={assignee.id} value={assignee.id}>
             {assignee.name}

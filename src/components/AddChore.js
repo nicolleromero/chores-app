@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Col, Form, InputGroup } from 'react-bootstrap';
 import TextField from '@material-ui/core/TextField';
 
@@ -9,13 +9,11 @@ import { addChore } from "../redux/actions";
 
 export function AddChore() {
   const dispatch = useDispatch();
-  const assignees = useSelector(state => state.assignees);
   const [inputValue, setInputValue] = useState('');
   const [inputPoints, setInputPoints] = useState('');
   const [assigneeId, setAssigneeId] = useState(undefined);
 
   function handleAddChore() {
-
     const newChore = {
       id: Date.now(),
       value: inputValue.trim(),
@@ -23,7 +21,6 @@ export function AddChore() {
       complete: false,
       points: Number(inputPoints),
     }
-
     dispatch(addChore(newChore));
 
     setInputValue('');
@@ -69,7 +66,6 @@ export function AddChore() {
                   />
                   <DropdownSelect
                     style={{ marginRight: 10 }}
-                    assignees={assignees}
                     selected={assigneeId}
                     onSelect={(key) => updateAssignee(key)}
                   />
