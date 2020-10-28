@@ -1,28 +1,25 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import Confetti from 'react-confetti';
 
 import { Title } from './Title';
 import { SetupModal } from './SetupModal';
 import { KidCard } from './KidCard';
 import { AddChore } from './AddChore';
-import { showSetupModal, showConfettiFall } from "../redux/actions";
+import { ConfettiAction } from './ConfettiAction';
+import { showSetupModal } from "../redux/actions";
+
+import './App.css';
 
 export const App = () => {
   const dispatch = useDispatch();
   const showSetup = useSelector(state => state.showSetup);
   const assignees = useSelector(state => state.assignees);
-  const showConfetti = useSelector(state => state.showConfetti);
 
   useEffect(() => {
     if (!assignees.length) {
       handleSetup();
     }
   }, []);
-
-  const handleConfettiComplete = () => {
-    dispatch(showConfettiFall(false));
-  }
 
   const handleSetup = () => {
     dispatch(showSetupModal());
@@ -32,7 +29,7 @@ export const App = () => {
     <React.Fragment>
       <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm">
         <img className="inline-block h-8 w-8 rounded-full" src="https://github.com/nicolleromero.png?size=40" alt="" />
-        <div className="mr-md-auto navbar-subtitle">&nbsp;&nbsp;NR Productions</div>
+        <div className="mr-md-auto avitar">NR Productions</div>
         <nav className="my-2 my-md-0 mr-md-3"></nav>
         <button
           className="flex"
@@ -66,14 +63,7 @@ export const App = () => {
       <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <nav className="my-2 my-md-0 mr-md-3"></nav>
       </div>
-      {showConfetti && (
-        <Confetti
-          recycle={false}
-          style={{ position: 'fixed' }}
-          numberOfPieces={1500}
-          onConfettiComplete={handleConfettiComplete}
-        />
-      )}
+      <ConfettiAction />
       <SetupModal
         showSetup={showSetup}
       />

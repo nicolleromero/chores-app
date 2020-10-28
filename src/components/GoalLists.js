@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { addGoal, showConfettiFall } from "../redux/actions";
+import { addGoal } from "../redux/actions";
 import { getCompletedGoalsList, getIncompleteGoalsList, getRemainingPoints } from '../redux/selectors'
 
 
@@ -14,10 +14,6 @@ export function GoalLists(props) {
   const completedGoalsList = useSelector((state) => getCompletedGoalsList(state, props.assignee.id));
   const incompleteGoalsList = useSelector((state) => getIncompleteGoalsList(state, props.assignee.id));
   const remainingPoints = useSelector((state) => getRemainingPoints(state, props.assignee.id));
-
-  function handleGoalCompleted() {
-    dispatch(showConfettiFall(true));
-  }
 
   function handleAddGoal(newGoal) {
     dispatch(addGoal(newGoal));
@@ -36,12 +32,6 @@ export function GoalLists(props) {
       handleAddGoal(newGoal);
     }
   }, [incompleteGoalsList]);
-
-  function componentDidUpdate(prevProps) {
-    if (completedGoalsList.length > prevProps.completedGoalsList.length) {
-      handleGoalCompleted();
-    }
-  }
 
   return (
     <div className="card shadow-sm">

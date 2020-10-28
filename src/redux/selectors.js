@@ -1,6 +1,3 @@
-export const getChoreList = state => state.choreList;
-export const getGoalList = state => state.goalList;
-
 // Status = done or undone
 export function getChoreStatusList(state, assigneeId, done) {
   return getChoreList(state)
@@ -8,20 +5,30 @@ export function getChoreStatusList(state, assigneeId, done) {
     .filter((item) => item['complete'] === done);
 }
 
-export function getFilteredGoalList(state, assigneeId) {
-  return getGoalList(state)
-    .filter((goal) => goal.assignee === assigneeId)
+export function getChoreList(state, assigneeId) {
+  const list = state.choreList;
+
+  return assigneeId
+    ? list.filter((chore) => chore.assignee === assigneeId)
+    : list;
+}
+
+export function getGoalList(state, assigneeId) {
+  const list = state.goalList;
+
+  return assigneeId
+    ? list.filter((goal) => goal.assignee === assigneeId)
+    : list;
 }
 
 export function getPointsTotal(state, assigneeId) {
-  return getChoreList(state)
-    .filter((chore) => chore.assignee === assigneeId)
+  return getChoreList(state, assigneeId)
     .filter((chore) => chore.complete)
     .reduce((sum, chore) => sum + Number(chore.points), 0);
 }
 
 export function getCompletedGoalsList(state, assigneeId) {
-  const list = getFilteredGoalList(state, assigneeId);
+  const list = getGoalList(state, assigneeId);
   let remainingPoints = getPointsTotal(state, assigneeId);
   const completedGoalsList = [];
 
@@ -38,7 +45,7 @@ export function getCompletedGoalsList(state, assigneeId) {
 }
 
 export function getIncompleteGoalsList(state, assigneeId) {
-  const list = getFilteredGoalList(state, assigneeId);
+  const list = getGoalList(state, assigneeId);
   const completedList = getCompletedGoalsList(state, assigneeId);
 
   return list.slice(completedList.length);
