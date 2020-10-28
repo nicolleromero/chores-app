@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import {
   ADD_BOARDNAME,
   ADD_ASSIGNEE,
@@ -21,11 +20,6 @@ export const INITIAL_STATE = {
   showConfetti: false,
   showSetup: false,
 }
-
-// import visibilityFilter from "./visibilityFilter";
-// import todos from "./todos";
-
-// export default combineReducers({ todos, visibilityFilter });
 
 export function reducer(state = INITIAL_STATE, action) {
 

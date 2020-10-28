@@ -4,13 +4,13 @@ import { ListGroup } from 'react-bootstrap';
 import { useSelector } from "react-redux";
 
 import { Chore } from './Chore';
-import { getStatusList } from '../redux/selectors';
+import { getChoreStatusList } from '../redux/selectors';
 
 import './ChoreList.css';
 
 export function ChoreList(props) {
-  const doneList = useSelector((state) => getStatusList(state, props.assignee.id, true));
-  const undoneList = useSelector((state) => getStatusList(state, props.assignee.id, false));
+  const doneList = useSelector((state) => getChoreStatusList(state, props.assignee.id, true));
+  const undoneList = useSelector((state) => getChoreStatusList(state, props.assignee.id, false));
 
   function formatChoreListTitles(list, completed) {
     let title = "";
