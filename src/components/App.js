@@ -12,8 +12,6 @@ export const App = () => {
   const dispatch = useDispatch();
   const showSetup = useSelector(state => state.showSetup);
   const assignees = useSelector(state => state.assignees);
-  const choreList = useSelector(state => state.choreList);
-  const goalList = useSelector(state => state.goalList);
   const showConfetti = useSelector(state => state.showConfetti);
 
   useEffect(() => {
@@ -60,34 +58,22 @@ export const App = () => {
               <KidCard
                 assignee={assignee}
                 key={assignee.id}
-                choreList={choreList.filter((chore) => {
-                  return chore.assignee === assignee.id;
-                })}
-                goalList={goalList.filter((goal) => {
-                  return goal.assignee === assignee.id;
-                })}
               />
             )
           })}
         </div>
       </div>
-
-
       <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 className="my-0 mr-md-auto font-weight-normal"><br /></h5>
         <nav className="my-2 my-md-0 mr-md-3"></nav>
       </div>
-
-      {
-        showConfetti && (
-          <Confetti
-            recycle={false}
-            style={{ position: 'fixed' }}
-            numberOfPieces={1500}
-            onConfettiComplete={handleConfettiComplete}
-          />
-        )
-      }
+      {showConfetti && (
+        <Confetti
+          recycle={false}
+          style={{ position: 'fixed' }}
+          numberOfPieces={1500}
+          onConfettiComplete={handleConfettiComplete}
+        />
+      )}
       <SetupModal
         showSetup={showSetup}
       />

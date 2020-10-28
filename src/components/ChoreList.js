@@ -3,14 +3,14 @@ import FlipMove from 'react-flip-move';
 import { ListGroup } from 'react-bootstrap';
 import { useSelector } from "react-redux";
 
-import { Chore } from './Chore'
+import { Chore } from './Chore';
+import { getStatusList } from '../redux/selectors';
 
 import './ChoreList.css';
 
 export function ChoreList(props) {
-  const assignees = useSelector(state => state.assignees);
-  const choreList = useSelector(state => state.choreList);
-
+  const doneList = useSelector((state) => getStatusList(state, props.assignee.id, true));
+  const undoneList = useSelector((state) => getStatusList(state, props.assignee.id, false));
 
   function formatChoreListTitles(list, completed) {
     let title = "";
@@ -31,16 +31,6 @@ export function ChoreList(props) {
     return title;
   }
 
-  let doneList = [];
-  let undoneList = [];
-
-  doneList = choreList
-    .filter((item) => item['complete'])
-    .filter((chore) => chore.assignee === props.assignee.id);
-  undoneList = choreList
-    .filter((item) => !item['complete'])
-    .filter((chore) => chore.assignee === props.assignee.id);
-
   return (
     <div className="card shadow-sm">
       <div className="card-header">
@@ -50,7 +40,6 @@ export function ChoreList(props) {
       </div>
       <div className="card-body text-center">
         <ListGroup variant="flush">
-
           <div className="align-text-center chore-title">
             {formatChoreListTitles(undoneList, false)}</div>
           <FlipMove duration={350} easing="ease-out">

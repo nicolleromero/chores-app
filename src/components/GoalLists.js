@@ -1,11 +1,22 @@
 import React, { useEffect } from "react";
 import { ListGroup } from 'react-bootstrap';
+import { useDispatch } from "react-redux";
+import { addGoal, showConfettiFall } from "../redux/actions";
 
 import { Goal } from './Goal';
 import { GoalProgressBar } from './GoalProgressBar';
 import './GoalLists.css';
 
 export function GoalLists(props) {
+  const dispatch = useDispatch();
+
+  function handleGoalCompleted() {
+    dispatch(showConfettiFall(true));
+  }
+
+  function handleAddGoal(newGoal) {
+    dispatch(addGoal(newGoal));
+  }
 
   useEffect(() => {
     if (!props.incompleteGoalsList.length) {
@@ -17,15 +28,15 @@ export function GoalLists(props) {
         points: 0,
       };
 
-      props.onAddGoal(newGoal);
+      handleAddGoal(newGoal);
     }
   }, [props.incompleteGoalsList]);
 
-  // function componentDidUpdate(prevProps) {
-  //   if (props.completedGoalsList.length > prevProps.completedGoalsList.length) {
-  //     props.onGoalCompleted();
-  //   }
-  // }
+  function componentDidUpdate(prevProps) {
+    if (props.completedGoalsList.length > prevProps.completedGoalsList.length) {
+      handleGoalCompleted();
+    }
+  }
 
   return (
     <div className="card shadow-sm">
@@ -43,8 +54,6 @@ export function GoalLists(props) {
                   className="align-items-center"
                   key={goal.id}
                   goal={goal}
-                  onChange={props.onChangeGoal}
-                  onDelete={props.onDeleteGoal}
                 />
                 {index === 0 && (
                   <div className="card-body text-center">
@@ -72,8 +81,6 @@ export function GoalLists(props) {
                   <Goal
                     key={goal.id}
                     goal={goal}
-                    onDelete={props.onDeleteGoal}
-                    onChange={props.onChangeGoal}
                   />
                   {/* Added logic to show 100% bar for first goal in completed list */}
                   {index === 0 && props.incompleteGoalsList[0] && !props.incompleteGoalsList[0].points && (
