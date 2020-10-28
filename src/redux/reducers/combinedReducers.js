@@ -23,115 +23,128 @@ export const INITIAL_STATE = {
 
 export function reducer(state = INITIAL_STATE, action) {
 
-  if (action.type === ADD_BOARDNAME) {
-    const newBoardName = action.payload;
+  switch (action.type) {
+    case ADD_BOARDNAME: {
+      const newBoardName = action.payload;
 
-    return {
-      ...state,
-      boardName: newBoardName,
-    };
+      return {
+        ...state,
+        boardName: newBoardName,
+      };
+    }
 
-  } else if (action.type === SHOW_SETUPMODAL) {
-    const newState = action.payload;
+    case SHOW_SETUPMODAL: {
+      const newState = action.payload;
 
-    return {
-      ...state,
-      showSetup: newState,
-    };
+      return {
+        ...state,
+        showSetup: newState,
+      };
+    }
 
-  } else if (action.type === ADD_ASSIGNEE) {
-    const newAssignee = action.payload;
+    case ADD_ASSIGNEE: {
+      const newAssignee = action.payload;
 
-    return {
-      ...state,
-      assignees: [...state.assignees, newAssignee],
-    };
+      return {
+        ...state,
+        assignees: [...state.assignees, newAssignee],
+      };
+    }
 
-  } else if (action.type === DELETE_ASSIGNEE) {
-    const assigneeId = action.payload;
-    const newAssignees = state.assignees.filter((c) => c.id !== assigneeId);
+    case DELETE_ASSIGNEE: {
+      const assigneeId = action.payload;
+      const newAssignees = state.assignees.filter((c) => c.id !== assigneeId);
 
-    return {
-      ...state,
-      assignees: newAssignees,
-    };
+      return {
+        ...state,
+        assignees: newAssignees,
+      };
+    }
 
-  } else if (action.type === CHANGE_ASSIGNEE) {
-    const { assigneeId, key, value } = action.payload;
-    const newAssignees = state.assignees.map((assignee) => {
-      if (assignee.id === assigneeId) {
-        return { ...assignee, [key]: value };
-      }
-      return assignee;
-    });
+    case CHANGE_ASSIGNEE: {
+      const { assigneeId, key, value } = action.payload;
+      const newAssignees = state.assignees.map((assignee) => {
+        if (assignee.id === assigneeId) {
+          return { ...assignee, [key]: value };
+        }
+        return assignee;
+      });
 
-    return {
-      ...state,
-      assignees: newAssignees,
-    };
+      return {
+        ...state,
+        assignees: newAssignees,
+      };
+    }
 
-  } else if (action.type === ADD_CHORE) {
-    const newChore = action.payload;
+    case ADD_CHORE: {
+      const newChore = action.payload;
 
-    return {
-      ...state,
-      choreList: [...state.choreList, newChore],
-    };
+      return {
+        ...state,
+        choreList: [...state.choreList, newChore],
+      };
+    }
 
-  } else if (action.type === DELETE_CHORE) {
-    const itemId = action.payload;
-    const newChoreList = state.choreList.filter((c) => c.id !== itemId);
+    case DELETE_CHORE: {
+      const itemId = action.payload;
+      const newChoreList = state.choreList.filter((c) => c.id !== itemId);
 
-    return {
-      ...state,
-      choreList: newChoreList,
-    };
+      return {
+        ...state,
+        choreList: newChoreList,
+      };
+    }
 
-  } else if (action.type === CHANGE_CHORE) {
-    const { itemId, key, value } = action.payload;
-    const newChoreList = state.choreList.map((listItem) => {
-      if (listItem.id === itemId) {
-        return { ...listItem, [key]: value };
-      }
-      return listItem;
-    });
+    case CHANGE_CHORE: {
+      const { itemId, key, value } = action.payload;
+      const newChoreList = state.choreList.map((listItem) => {
+        if (listItem.id === itemId) {
+          return { ...listItem, [key]: value };
+        }
+        return listItem;
+      });
 
-    return {
-      ...state,
-      choreList: newChoreList,
-    };
+      return {
+        ...state,
+        choreList: newChoreList,
+      };
+    }
 
-  } else if (action.type === ADD_GOAL) {
-    const newGoal = action.payload;
+    case ADD_GOAL: {
+      const newGoal = action.payload;
 
-    return {
-      ...state,
-      goalList: [...state.goalList, newGoal],
-    };
+      return {
+        ...state,
+        goalList: [...state.goalList, newGoal],
+      };
+    }
 
-  } else if (action.type === DELETE_GOAL) {
-    const goalId = action.payload;
-    const newGoalList = state.goalList.filter((c) => c.id !== goalId);
+    case DELETE_GOAL: {
+      const goalId = action.payload;
+      const newGoalList = state.goalList.filter((c) => c.id !== goalId);
 
-    return {
-      ...state,
-      goalList: newGoalList,
-    };
+      return {
+        ...state,
+        goalList: newGoalList,
+      };
+    }
 
-  } else if (action.type === CHANGE_GOAL) {
-    const { goalId, key, value } = action.payload;
-    const newGoalList = state.goalList.map((goal) => {
-      if (goal.id === goalId) {
-        return { ...goal, [key]: value };
-      }
-      return goal;
-    });
+    case CHANGE_GOAL: {
+      const { goalId, key, value } = action.payload;
+      const newGoalList = state.goalList.map((goal) => {
+        if (goal.id === goalId) {
+          return { ...goal, [key]: value };
+        }
+        return goal;
+      });
 
-    return {
-      ...state,
-      goalList: newGoalList,
-    };
+      return {
+        ...state,
+        goalList: newGoalList,
+      };
+    }
+
+    default:
+      return state;
   }
-
-  return state;
 }
