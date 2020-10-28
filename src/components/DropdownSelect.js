@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -16,7 +16,6 @@ const styles = {
 };
 
 function InnerDropdownSelect(props) {
-  const dispatch = useDispatch();
   const assignees = useSelector(state => state.assignees);
 
   let currentAssignee = assignees.find((assignee) => {

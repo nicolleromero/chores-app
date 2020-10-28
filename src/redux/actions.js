@@ -10,7 +10,6 @@ import {
   DELETE_GOAL,
   CHANGE_GOAL,
   SHOW_SETUPMODAL,
-  SHOW_CONFETTI
 } from "./actionTypes";
 
 export const setBoardName = (boardName) => {
@@ -80,27 +79,6 @@ export const changeGoal = (goalId, key, value) => {
   return {
     type: CHANGE_GOAL,
     payload: { goalId, key, value },
-  };
-}
-
-export const goalCompleted = () => {
-  return {
-    type: SHOW_CONFETTI,
-    payload: true,
-  };
-}
-
-export const confettiComplete = () => {
-  return {
-    type: SHOW_CONFETTI,
-    payload: false,
-  };
-}
-
-export const showConfettiFall = () => {
-  return {
-    type: SHOW_CONFETTI,
-    payload: true,
   };
 }
 

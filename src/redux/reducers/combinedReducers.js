@@ -17,7 +17,6 @@ export const INITIAL_STATE = {
   assignees: [],
   choreList: [],
   goalList: [],
-  showConfetti: false,
   showSetup: false,
 }
 

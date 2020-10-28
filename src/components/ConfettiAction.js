@@ -1,20 +1,22 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import Confetti from 'react-confetti';
-import { getCompletedGoalsList } from '../redux/selectors';
+import { getCompletedGoalsList, getIncompleteGoalsList } from '../redux/selectors';
 
 export function ConfettiAction(props) {
   const completedGoalsList = useSelector(getCompletedGoalsList);
-  const currentCount = completedGoalsList.length;
-  const prevCountRef = useRef(currentCount);
+  const incompleteGoalsList = useSelector(getIncompleteGoalsList);
+  const currentCompleteCount = completedGoalsList.length;
+  const currentIncompleteCount = incompleteGoalsList.length;
+  const prevCompleteCountRef = useRef(currentCompleteCount);
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
-    if (currentCount > prevCountRef.current) {
-      prevCountRef.current = currentCount;
+    if (currentCompleteCount > prevCompleteCountRef.current) {
       setShowConfetti(true);
     }
-  }, [currentCount]);
+    prevCompleteCountRef.current = currentCompleteCount;
+  }, [currentCompleteCount, currentIncompleteCount]);
 
   return showConfetti && (
     <Confetti

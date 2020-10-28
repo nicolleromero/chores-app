@@ -9,4 +9,3 @@ export const ADD_GOAL = 'ADD_GOAL';
 export const DELETE_GOAL = 'DELETE_GOAL';
 export const CHANGE_GOAL = 'CHANGE_GOAL';
 export const SHOW_SETUPMODAL = 'SHOW_SETUPMODAL';
-export const SHOW_CONFETTI = 'SHOW_CONFETTI';

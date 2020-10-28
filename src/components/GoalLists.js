@@ -72,7 +72,7 @@ export function GoalLists(props) {
             </div>
             {completedGoalsList.map((goal, index) => {
               return (
-                <div>
+                <div key={index}>
                   <Goal
                     key={goal.id}
                     goal={goal}

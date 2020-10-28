@@ -40,8 +40,6 @@ export function AddChore() {
     setAssigneeId(value);
   }
 
-  console.log('assignedId', assigneeId);
-
   return (
     <div>
       <div>
